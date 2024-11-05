@@ -6,6 +6,7 @@ TagManager:
   tags:
   - StructButton
   - StructBase
+  - Enemy
   layers:
   - Default
   - TransparentFX

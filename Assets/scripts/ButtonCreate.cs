@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonCreate : MonoBehaviour
+public class ButtonCreate : MonoBehaviour,InterfaceStructButton
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private StructEmpty currentStruct;
+    [SerializeField] private int indexStructure;
+    private bool enabledButton;
+
+    private void Awake()
     {
-        
+        enabledButton = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ListenerButton()
     {
-        
+        if(enabledButton)
+            currentStruct.CreateStructure(indexStructure);
     }
+
+    public void SetEnabledButton(bool state)
+    {
+        enabledButton = state;
+    } 
 }

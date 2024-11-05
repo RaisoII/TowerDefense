@@ -4,5 +4,6 @@ using UnityEngine;
 
 public interface InterfaceStructButton
 {
-    void listenerButton();
+    void ListenerButton();
+    void SetEnabledButton(bool state);
 }

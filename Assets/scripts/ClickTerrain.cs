@@ -30,6 +30,9 @@ public class ClickTerrain : MonoBehaviour
                 return;
             }
 
+            
+                Debug.Log("col: "+hit.collider.tag + " nombre: "+hit.collider.gameObject.name);
+
             if(hit.collider.CompareTag("StructBase"))
             {
                 currentStruct = hit.collider.gameObject.GetComponent<StructBase>();
@@ -48,20 +51,13 @@ public class ClickTerrain : MonoBehaviour
                     currentStruct.ActivatedButton(true);
                     previousStruct = currentStruct;
                 }
-
-                Debug.Log("col: StructBase");
             }
             else if(hit.collider.CompareTag("StructButton"))
             {
-                Debug.Log("entra acá pa");
                 InterfaceStructButton button = hit.collider.gameObject.GetComponent<InterfaceStructButton>();
-                button.listenerButton();
-                
-                Debug.Log("col: StructButton");
-            }
-            else
-            {
-                Debug.Log("col: otro tag");
+                button.ListenerButton();
             }
     }
+
+    public StructBase GetCurrentStructure() => currentStruct;
 }
