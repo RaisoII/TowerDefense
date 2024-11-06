@@ -53,7 +53,7 @@ public class Grid
 
         if(cell == null)
             return false;
-        
+
         return cell.walkable;
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StructTower : StructBase
 {
-    [SerializeField] private float range,deltaRange;
+    [SerializeField] private float deltaRange;
     [SerializeField] private float cadence;
     [SerializeField] private GameObject projectile;
     [SerializeField] private float heightShot;
@@ -69,4 +69,6 @@ public class StructTower : StructBase
             rutineRun = true;
         }
     }
+    
+    public override void MoveSoldiers(Vector2 pos){}
 }

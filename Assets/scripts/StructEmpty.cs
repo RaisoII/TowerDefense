@@ -16,10 +16,9 @@ public class StructEmpty : StructBase
         moneyManager.SetCantMoney(-structBase.GetCost());
         ActivatedButton(false);
     }
-    public override void  DestroyStructure()
-    {
-
-    }
+    public override void  DestroyStructure(){}
+    
+    public override void MoveSoldiers(Vector2 pos){}
 
     public void DestroyStructure(int cost)
     {

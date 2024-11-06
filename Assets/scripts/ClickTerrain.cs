@@ -64,5 +64,11 @@ public class ClickTerrain : MonoBehaviour
             }
     }
 
+    public void ResetStructures()
+    {
+        currentStruct = null;
+        previousStruct = null;
+    }
+
     public StructBase GetCurrentStructure() => currentStruct;
 }

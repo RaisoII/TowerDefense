@@ -7,9 +7,10 @@ public abstract class StructBase : MonoBehaviour
 {
     [SerializeField] protected List<GameObject> prefabsStructures; 
     [SerializeField] protected List<GameObject> listStructuresButton;
-    [SerializeField] protected GameObject buttonDelete;
+    [SerializeField] protected GameObject buttonDelete,buttonDestinySoldier;
     [SerializeField] protected GameObject gameObjectRange;
     [SerializeField] protected int cost;
+    [SerializeField] protected float range;
     [SerializeField] protected Color enabledColor,disabledColor;
     protected MoneyManager moneyManager;
     protected bool currentState;
@@ -27,8 +28,6 @@ public abstract class StructBase : MonoBehaviour
             GameObject button = listStructuresButton[i];
             button.transform.GetChild(2).gameObject.GetComponent<TextMeshPro>().text = ""+costStructure;
         }
-        if(buttonDelete != null)
-            buttonDelete.transform.GetChild(2).gameObject.SetActive(false);
     }    
     public void ActivatedButton(bool state)
     {
@@ -42,6 +41,9 @@ public abstract class StructBase : MonoBehaviour
 
         if(buttonDelete != null)
             buttonDelete.SetActive(state);
+
+        if(buttonDestinySoldier != null)
+            buttonDestinySoldier.SetActive(state);
         
         gameObjectRange.SetActive(state);
         currentState = state;
@@ -71,5 +73,9 @@ public abstract class StructBase : MonoBehaviour
     public void SetParent(StructEmpty parent) => this.parent = parent;
     public StructEmpty GetParent() => parent;
     public int GetCost() => cost;
+
+    public float GetRange() => range;
     public abstract void DestroyStructure();
+    
+    public abstract void MoveSoldiers(Vector2 pos);
 }

@@ -7,15 +7,17 @@ public class StructBarraks : StructBase
     [SerializeField] private GameObject soldier;
     [SerializeField] private int cantSoldier;
     [SerializeField] private List<GameObject> listSpot;
+    private Vector2[] formationOffsets;
     private GridManager gridManager;
     private List<Vector2> posibleSpot;
+    private List<GameObject> soldiers;
     private Vector2 dir;
     private Vector2 finalPos;
 
     protected override void Start()
     {
         base.Start();
-
+        soldiers = new List<GameObject>();
         GameObject scripts = GameObject.Find("scriptsGenerales"); 
         gridManager = scripts.GetComponent<GridManager>();
 
@@ -45,6 +47,7 @@ public class StructBarraks : StructBase
             j++;
             if(j == posArray.Length)
                 j = 0;
+            soldiers.Add(soldierInstantiate);
         }
     }
 
@@ -53,16 +56,27 @@ public class StructBarraks : StructBase
         Vector2[] posArray = new Vector2[3];
         posArray[0] = finalPos;
         
-        if(dir == Vector2.up || dir == Vector2.down)
+        if(dir == Vector2.up)
         {
-            posArray[1] = finalPos + .5f*Vector2.left;
-            posArray[2] = finalPos - .5f*Vector2.left;
+            posArray[1] = finalPos + .5f*Vector2.left + .4f*Vector2.down;
+            posArray[2] = finalPos - .5f*Vector2.left + .4f*Vector2.down;
+        }
+        else if(dir == Vector2.down)
+        {
+            posArray[1] = finalPos + .5f*Vector2.left + .4f*Vector2.up;
+            posArray[2] = finalPos - .5f*Vector2.left + .4f*Vector2.up;
+        }
+        else if(dir == Vector2.right)
+        {
+            posArray[1] = finalPos + .5f*Vector2.up + .4f*Vector2.left;
+            posArray[2] = finalPos - .5f*Vector2.down + .4f*Vector2.left;
         }
         else
         {
-            posArray[1] = finalPos + .5f*Vector2.up;
-            posArray[2] = finalPos - .5f*Vector2.down;
+            posArray[1] = finalPos + .5f*Vector2.up + .4f*Vector2.right;
+            posArray[2] = finalPos - .5f*Vector2.down + .4f*Vector2.right;
         }
+
         return posArray;
     }
 
@@ -76,7 +90,19 @@ public class StructBarraks : StructBase
 
     public override void  DestroyStructure()
     {
+        foreach(GameObject soldier in soldiers)
+            Destroy(soldier);
+        
         parent.DestroyStructure(cost);
         Destroy(gameObject);
+    }
+
+    public override void MoveSoldiers(Vector2 pos)
+    {
+        foreach(GameObject soldier in soldiers)
+        {
+            Soldier s = soldier.GetComponent<Soldier>();
+            s.SetTarget(pos);
+        }
     }
 }

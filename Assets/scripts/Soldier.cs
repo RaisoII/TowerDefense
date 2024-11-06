@@ -25,8 +25,6 @@ public class Soldier : MonoBehaviour
 
     public void SetTarget(Vector2 posTarget)
     {
-        
-        Debug.Log("entro set");
         target = posTarget;
         enabled = true;
     }

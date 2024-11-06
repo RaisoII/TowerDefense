@@ -347,11 +347,12 @@ MonoBehaviour:
   prefabsStructures: []
   listStructuresButton: []
   buttonDelete: {fileID: 7873892795726359414}
+  buttonDestinySoldier: {fileID: 0}
   gameObjectRange: {fileID: 8586262500821129994}
   cost: 10
+  range: 3
   enabledColor: {r: 1, g: 1, b: 1, a: 1}
   disabledColor: {r: 0.4509804, g: 0.4392157, b: 0.4392157, a: 1}
-  range: 3
   deltaRange: 0.2
   cadence: 2
   projectile: {fileID: 6854941420380304020, guid: 597995e91de4d2b4eab3f1c5cf30ef09, type: 3}
@@ -372,6 +373,10 @@ PrefabInstance:
     - target: {fileID: 2527221100408786349, guid: 4f07dde75d7670c44915db6ef80581e3, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4406678097786894203, guid: 4f07dde75d7670c44915db6ef80581e3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4419755288767910725, guid: 4f07dde75d7670c44915db6ef80581e3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -460,6 +465,10 @@ PrefabInstance:
       value: botonDestroy
       objectReference: {fileID: 0}
     - target: {fileID: 2527221100408786349, guid: 4f07dde75d7670c44915db6ef80581e3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4406678097786894203, guid: 4f07dde75d7670c44915db6ef80581e3, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
