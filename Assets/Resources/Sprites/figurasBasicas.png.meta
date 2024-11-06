@@ -214,6 +214,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: cuadradoContorno
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f7c9d79b66122649b0cc7cf0a9378a2
+      internalID: -1466473048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "cuadradoPeque\xF1o"
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed865a5bd869af340b9ddc80c9b4419e
+      internalID: -1866220945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -231,6 +273,8 @@ TextureImporter:
       circuloRelleno: 590563297
       circuloSinEscalar: 788082350
       cuadrado: 1308886963
+      cuadradoContorno: -1466473048
+      "cuadradoPeque\xF1o": -1866220945
       medioCirculoAbajo: -1170203671
       medioCirculoArriba: -1057515204
       medioCirculoDerecho: 1929554915

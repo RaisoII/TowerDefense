@@ -7,6 +7,7 @@ TagManager:
   - StructButton
   - StructBase
   - Enemy
+  - Point
   layers:
   - Default
   - TransparentFX

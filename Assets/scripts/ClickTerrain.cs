@@ -6,6 +6,11 @@ public class ClickTerrain : MonoBehaviour
 {
     private StructBase currentStruct,previousStruct;
 
+    private void Start()
+    {
+        
+    }
+
     void Update()
     {
         if(Input.GetButtonDown("Fire1"))
@@ -26,12 +31,12 @@ public class ClickTerrain : MonoBehaviour
                     previousStruct = null;
                 }
                 
-                Debug.Log("no choca con na'");
+                //Debug.Log("no choca con na'");
                 return;
             }
 
             
-                Debug.Log("col: "+hit.collider.tag + " nombre: "+hit.collider.gameObject.name);
+                //Debug.Log("col: "+hit.collider.tag + " nombre: "+hit.collider.gameObject.name);
 
             if(hit.collider.CompareTag("StructBase"))
             {
