@@ -24,14 +24,12 @@ public class Enemy : MonoBehaviour
         // Mueve el enemigo hacia el objetivo (target) utilizando MoveTowards
         transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
         //Roto la imagen si la distancia entre el target y enemigo <=-0.1f y viceversa
-        if((transform.position.x -target.x) < 0)
+        if((transform.position.x -target.x) <= 0)
         {
             spriteRender.flipX = false;
         }
-        if ((transform.position.x - target.x) > 0)
-        {
+        else
             spriteRender.flipX = true;
-        }
         // Comprueba si se ha llegado al punto de destino
         if (Vector2.Distance(transform.position, target) < 0.1f)
         {

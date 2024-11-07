@@ -171,8 +171,10 @@ MonoBehaviour:
   - {fileID: 7889209148611478762}
   - {fileID: 7183339561059348151}
   buttonDelete: {fileID: 0}
+  buttonDestinySoldier: {fileID: 0}
   gameObjectRange: {fileID: 1026806083966164129}
   cost: 0
+  range: 0
   enabledColor: {r: 1, g: 1, b: 1, a: 1}
   disabledColor: {r: 0.4509804, g: 0.4392157, b: 0.4392157, a: 1}
 --- !u!68 &3098224633394945164

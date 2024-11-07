@@ -14,7 +14,7 @@ public class SpawnEnemies : MonoBehaviour
         foreach(GameObject enemy in listEnemies)
         {
             float timeSpawn = Random.Range(timeMinBetweenEnemy,timeMaxBetweenEnemy);
-            GameObject enemyInstantiate = Instantiate(enemy,transform.position,Quaternion.Euler(0,0,0));
+            GameObject enemyInstantiate = Instantiate(enemy,transform.position,Quaternion.identity);
             enemyInstantiate.GetComponent<Enemy>().SetNextPoint(nextPoint); 
             yield return new WaitForSeconds(timeSpawn);
         }
