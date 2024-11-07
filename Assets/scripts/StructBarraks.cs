@@ -7,17 +7,23 @@ public class StructBarraks : StructBase
     [SerializeField] private GameObject soldier;
     [SerializeField] private int cantSoldier;
     [SerializeField] private List<GameObject> listSpot;
+    
+    private GameObject[] soldiers;
     private Vector2[] formationOffsets;
+    private Vector2[] startPos;
     private GridManager gridManager;
     private List<Vector2> posibleSpot;
-    private List<GameObject> soldiers;
     private Vector2 dir;
     private Vector2 finalPos;
 
     protected override void Start()
     {
         base.Start();
-        soldiers = new List<GameObject>();
+        
+        soldiers = new GameObject[3];
+        formationOffsets = new Vector2[3];
+        startPos = new Vector2[3];
+
         GameObject scripts = GameObject.Find("scriptsGenerales"); 
         gridManager = scripts.GetComponent<GridManager>();
 
@@ -37,47 +43,64 @@ public class StructBarraks : StructBase
 
     protected void spawnSoldier()
     {
-        Vector2[] posArray = SearchPositionSoldier();
-        int j = 0; // lleva el indice del arreglo si posArray < cantSoldier
-        for(int i = 0; i < cantSoldier; i++)
+        SearchPositionSoldier();
+
+        for(int i = 0; i < 3; i++) // 3 por ahora, no jodas
         {
             GameObject soldierInstantiate = Instantiate(soldier,transform.position,Quaternion.identity);
             Soldier sol = soldierInstantiate.GetComponent<Soldier>();
-            sol.SetTarget(posArray[j]);
-            j++;
-            if(j == posArray.Length)
-                j = 0;
-            soldiers.Add(soldierInstantiate);
+            sol.SetInitialPos(startPos[i]);
+            soldiers[i] = soldierInstantiate;
         }
     }
 
-    protected Vector2[] SearchPositionSoldier()
+    protected void SearchPositionSoldier()
     {
-        Vector2[] posArray = new Vector2[3];
-        posArray[0] = finalPos;
-        
+
         if(dir == Vector2.up)
         {
-            posArray[1] = finalPos + .5f*Vector2.left + .4f*Vector2.down;
-            posArray[2] = finalPos - .5f*Vector2.left + .4f*Vector2.down;
+            startPos[0] = finalPos + .1f*Vector2.up;
+            startPos[1] = finalPos + .3f*Vector2.left + .3f*Vector2.down;
+            startPos[2] = finalPos - .3f*Vector2.left + .3f*Vector2.down;
+
+            formationOffsets[0] = .1f*Vector2.up;
+            formationOffsets[1] = .3f*Vector2.left + .3f*Vector2.down;
+            formationOffsets[2] = - .3f*Vector2.left + .3f*Vector2.down;
+            
         }
         else if(dir == Vector2.down)
         {
-            posArray[1] = finalPos + .5f*Vector2.left + .4f*Vector2.up;
-            posArray[2] = finalPos - .5f*Vector2.left + .4f*Vector2.up;
+            startPos[0] = finalPos + .1f*Vector2.down;
+            startPos[1] = finalPos + .3f*Vector2.left + .3f*Vector2.up;
+            startPos[2] = finalPos - .3f*Vector2.left + .3f*Vector2.up;
+
+            
+            formationOffsets[0] = .1f*Vector2.down;
+            formationOffsets[1] = .3f*Vector2.left + .3f*Vector2.up;
+            formationOffsets[2] = -.3f*Vector2.left + .3f*Vector2.up;
         }
         else if(dir == Vector2.right)
         {
-            posArray[1] = finalPos + .5f*Vector2.up + .4f*Vector2.left;
-            posArray[2] = finalPos - .5f*Vector2.down + .4f*Vector2.left;
+            startPos[0] = finalPos + .1f*Vector2.right;
+            startPos[1] = finalPos + .3f*Vector2.up + .3f*Vector2.left;
+            startPos[2] = finalPos - .3f*Vector2.down + .3f*Vector2.left;
+
+            
+            formationOffsets[0] = .1f*Vector2.right;
+            formationOffsets[1] = .3f*Vector2.up + .3f*Vector2.left;
+            formationOffsets[2] = - .3f*Vector2.down + .3f*Vector2.left;
         }
         else
         {
-            posArray[1] = finalPos + .5f*Vector2.up + .4f*Vector2.right;
-            posArray[2] = finalPos - .5f*Vector2.down + .4f*Vector2.right;
-        }
+            startPos[0] = finalPos + .1f*Vector2.left;
+            startPos[1] = finalPos + .3f*Vector2.up + .3f*Vector2.right;
+            startPos[2] = finalPos - .3f*Vector2.down + .3f*Vector2.right;
 
-        return posArray;
+            
+            formationOffsets[0] = .1f*Vector2.left;
+            formationOffsets[1] = .3f*Vector2.up + .3f*Vector2.right;
+            formationOffsets[2] = - .3f*Vector2.down + .3f*Vector2.right;
+        }
     }
 
     private void CheckPosibleSpot(Vector2 pos)
@@ -99,10 +122,17 @@ public class StructBarraks : StructBase
 
     public override void MoveSoldiers(Vector2 pos)
     {
-        foreach(GameObject soldier in soldiers)
+        for(int i = 0; i < 3; i++)
         {
+            GameObject soldier = soldiers[i];
+            
+            if(soldier == null)
+                continue; 
+            
             Soldier s = soldier.GetComponent<Soldier>();
-            s.SetTarget(pos);
+            Vector2 finalPos = pos + formationOffsets[i];
+            
+            s.SetInitialPos(finalPos);
         }
     }
 }
