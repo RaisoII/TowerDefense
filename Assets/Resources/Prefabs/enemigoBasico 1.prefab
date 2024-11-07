@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 7026384742266017914}
   - component: {fileID: 5516497071836306952}
   - component: {fileID: 7902969064460287428}
-  - component: {fileID: 1874852047137440679}
+  - component: {fileID: 3487270332185660909}
   m_Layer: 0
-  m_Name: enemigoBasico
+  m_Name: enemigoBasico 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -196,7 +196,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!111 &1874852047137440679
+--- !u!111 &3487270332185660909
 Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -205,7 +205,7 @@ Animation:
   m_GameObject: {fileID: 5139193974657594151}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 59df8ab2d96dc21439271758259f1d58, type: 2}
+  m_Animation: {fileID: 7400000, guid: 50fa71516e59c6943a3ddf8b49033b81, type: 2}
   m_Animations: []
   m_WrapMode: 0
   m_PlayAutomatically: 1
