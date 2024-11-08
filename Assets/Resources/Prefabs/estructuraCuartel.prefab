@@ -438,6 +438,8 @@ MonoBehaviour:
   - {fileID: 3318676197157292483}
   - {fileID: 5244805651073080875}
   - {fileID: 3568180366384669194}
+  deltaBarrackRange: 0.2
+  timeRespawn: 6
 --- !u!61 &-6079121773145078808
 BoxCollider2D:
   m_ObjectHideFlags: 0

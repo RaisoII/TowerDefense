@@ -62,10 +62,10 @@ public class ParabolicShot : MonoBehaviour
         Enemy enemyTipe = enemy.GetComponent<Enemy>();
         Vector2 enemyDirection = SearchDirection(enemyTipe);
         Vector2 posEnemy = (Vector2)enemy.transform.position;
-        float enemyVelocity = enemyTipe.GetVelocity();
+        float enemyVelocity = enemyTipe.getVelocity();
         
         Vector2 OriginalDistance = posEnemy - start;
-        Vector2 relativeVelocity = enemyDirection * enemyTipe.GetVelocity() - OriginalDistance.normalized * speed;
+        Vector2 relativeVelocity = enemyDirection * enemyTipe.getVelocity() - OriginalDistance.normalized * speed;
 
         float timeImpact = OriginalDistance.magnitude / relativeVelocity.magnitude;
 
@@ -77,7 +77,7 @@ public class ParabolicShot : MonoBehaviour
 
     private Vector2 SearchDirection(Enemy enemy)
     {
-        Vector2 nextDestination = enemy.GetNextDestination();
+        Vector2 nextDestination = enemy.getNextDestination();
         Vector2 direction = (nextDestination - (Vector2)enemy.transform.position).normalized;
         return direction;
     }

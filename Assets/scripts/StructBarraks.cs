@@ -7,7 +7,8 @@ public class StructBarraks : StructBase
     [SerializeField] private GameObject soldier;
     [SerializeField] private int cantSoldier;
     [SerializeField] private List<GameObject> listSpot;
-    
+    [SerializeField] private float deltaBarrackRange;
+    [SerializeField] private float timeRespawn;
     private GameObject[] soldiers;
     private Vector2[] formationOffsets;
     private Vector2[] startPos;
@@ -15,11 +16,13 @@ public class StructBarraks : StructBase
     private List<Vector2> posibleSpot;
     private Vector2 dir;
     private Vector2 finalPos;
+    private bool respawnRunig;
 
     protected override void Start()
     {
         base.Start();
-        
+
+        respawnRunig = false;
         soldiers = new GameObject[3];
         formationOffsets = new Vector2[3];
         startPos = new Vector2[3];
@@ -46,19 +49,30 @@ public class StructBarraks : StructBase
         searchPositionSoldier();
 
         for(int i = 0; i < 3; i++) // 3 por ahora, no jodas
-        {
-            GameObject soldierInstantiate = Instantiate(soldier,transform.position,Quaternion.identity);
-            Soldier sol = soldierInstantiate.GetComponent<Soldier>();
-            sol.setInitialPos(startPos[i]);
-            soldiers[i] = soldierInstantiate;
-        }
+            instantiateSoldier(i);
+    }
 
-        for(int i =0 ; i < 3; i++)
+    private void instantiateSoldier(int index)
+    {
+        GameObject soldierInstantiate = Instantiate(soldier,transform.position,Quaternion.identity);
+        Soldier sol = soldierInstantiate.GetComponent<Soldier>();
+        sol.setInitialPos(startPos[index]);
+        sol.setBarrakRange(range);
+        sol.setDeltaBarrackRange(deltaBarrackRange);
+        sol.setBarrak(this);
+        soldiers[index] = soldierInstantiate;
+
+        
+        for(int i = 0; i < 3; i++) // todos los continue son necesarios ya que esta funcion se invoca no solo al instanicar la barraca
         {
             GameObject soldier = soldiers[i];
-            Soldier s = soldier.GetComponent<Soldier>();
             
-            int index = 0;
+            if(soldier == null)
+                continue;
+
+            Soldier s = soldier.GetComponent<Soldier>();
+
+            int indexFellow = 0;
             for(int j = 0 ; j < 3; j++)
             {
                 
@@ -66,9 +80,12 @@ public class StructBarraks : StructBase
                     continue;
 
                 GameObject soldierAux = soldiers[j];
-
-                s.setFellow(soldierAux,index);
-                index++;
+                
+                if(soldierAux == null)
+                    continue;
+                
+                s.setFellow(soldierAux,indexFellow);
+                indexFellow++;
             }
         }
     }
@@ -153,5 +170,46 @@ public class StructBarraks : StructBase
             
             s.setInitialPos(finalPos);
         }
+    }
+    
+    public void spawnNewSoldier()
+    {
+        if(!respawnRunig)
+        {
+            respawnRunig = true;
+            StartCoroutine(respawnRutine());
+        }
+    } 
+
+    private IEnumerator respawnRutine()
+    {
+        yield return new WaitForSeconds(timeRespawn);
+        int posEmpty = 0;
+        
+        for(int i = 0; i < 3; i++)
+        {
+            if(soldiers[i] == null)
+            {
+                posEmpty = i;
+                break;
+            }
+        }
+        
+        instantiateSoldier(posEmpty);
+
+        bool newRespawn = false;
+        foreach(GameObject soldier in soldiers)
+        {
+            if(soldier == null)
+            {
+                newRespawn = true;
+                break;
+            }
+        }
+
+        if(newRespawn)
+            StartCoroutine(respawnRutine());
+        else
+            respawnRunig = false;
     }
 }

@@ -4,19 +4,32 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float live;
+    [SerializeField] private float life;
+    [SerializeField] private float damage;
     [SerializeField] private float speed;  // Velocidad de movimiento
+    [SerializeField] private float frequency;
+    [SerializeField] private int ValueDeath;
+    private float currentSpeed;
     private float offset;
     private Point nextPoint;
     private Vector2 target;
     private Vector2 direction;
-    private SpriteRenderer spriteRender;
+    private SpriteRenderer render;
+    private Color originalColor;
+    private Soldier currentEnemy;
+    private Coroutine currentRutine;
+    private bool attacking;
+    private MoneyManager moneyManager;
     private void Awake()
     {
+        moneyManager = GameObject.Find("scriptsGenerales").GetComponent<MoneyManager>();
+        currentSpeed = speed;
+        attacking = false;
         int option = Random.Range(0, 3);
         offset = (option - 1) * 0.5f; // -0.5 para izquierda, 0 para centro, 0.5 para derecha
         enabled = false;
-        spriteRender = GetComponent<SpriteRenderer>();
+        render = GetComponent<SpriteRenderer>();
+        originalColor = render.color;
     }
 
     void Update()
@@ -25,11 +38,10 @@ public class Enemy : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
         //Roto la imagen si la distancia entre el target y enemigo <=-0.1f y viceversa
         if((transform.position.x -target.x) <= 0)
-        {
-            spriteRender.flipX = false;
-        }
+            render.flipX = false;
         else
-            spriteRender.flipX = true;
+            render.flipX = true;
+
         // Comprueba si se ha llegado al punto de destino
         if (Vector2.Distance(transform.position, target) < 0.1f)
         {
@@ -52,7 +64,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void SetNextPoint(Point nextPoint)
+    public void setNextPoint(Point nextPoint)
     {
         this.nextPoint = nextPoint;
         enabled = true;
@@ -63,19 +75,70 @@ public class Enemy : MonoBehaviour
         target = nextPoint.GetPos() + perpendicular * offset;
     }
 
-    public float GetVelocity() => speed;
+    public float getVelocity() => currentSpeed;
 
-    public Vector2 GetNextDestination() => nextPoint.GetPos();
+    public Vector2 getNextDestination() => nextPoint.GetPos();
 
     public void setLive(float cant)
     {
-        live += cant;
-        if(live <= 0)
+        life += cant;
+        if(life <= 0)
+        {
+            moneyManager.setCantMoney(ValueDeath);
             Destroy(gameObject);
+        }
+        else
+            StartCoroutine(hit());
     } 
 
-    public void Move(bool state)
+    private IEnumerator hit()
     {
+        render.color = Color.red;
+        yield return new WaitForSeconds(.1f);
+        render.color = originalColor;
+    }
+
+    public void move(Soldier currentEnemy,bool state)
+    {
+        if(!state)
+            this.currentEnemy = currentEnemy;
+        else
+        {
+            attacking = false;
+            this.currentEnemy = null;
+            
+            if(currentRutine != null)
+                StopCoroutine(currentRutine);
+        }
+
         enabled = state;
+    }
+
+    public void attack()
+    {
+        if(currentRutine == null)
+        {
+            currentSpeed = 0;
+            attacking = true;
+            currentRutine = StartCoroutine(rutineAttack());
+        }
+    } 
+
+    private IEnumerator rutineAttack()
+    {
+        while(attacking)
+        {
+            if(currentEnemy != null)
+            {
+                currentEnemy.setLive(-damage);
+                yield return new WaitForSeconds(frequency);
+            }
+            else
+                break;
+        }
+        
+        currentSpeed = speed;
+        attacking = false;
+        enabled = true;
     }
 }

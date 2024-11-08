@@ -4,21 +4,30 @@ using UnityEngine;
 
 public class Soldier : MonoBehaviour
 {
+    [SerializeField] private float life;
+    [SerializeField] private int damage;
+    [SerializeField] private float frequency;
     [SerializeField] private float speed;
     [SerializeField] private float attackRange;
-    [SerializeField] private float guardRange;
-    [SerializeField] private int attackPower;
-    private Vector2 guardPosition;
+    private float barrackRange;
+    private float deltaBarrackRange;
     private Soldier [] fellows;
     private Vector2 targetPosition;
+    private Vector2 startPosition;
     private List<GameObject> listEnemies;
     private GameObject currentEnemy;
+    private SpriteRenderer render;
+    private Color originalColor;
+    private Coroutine currentRutine;
+    private StructBarraks currentBarrak;
     
     private enum SoldierState { MovingToGuard, Guarding, MovingToEnemy, Attacking, Returning }
     private SoldierState currentState;
     
     private void Awake()
     {
+        render = GetComponent<SpriteRenderer>();
+        originalColor = render.color;
         fellows = new Soldier[2];
         listEnemies = new List<GameObject>();
         currentState = SoldierState.MovingToGuard;
@@ -63,10 +72,31 @@ public class Soldier : MonoBehaviour
         {
             moveToTarget();
         }
-        else
+        else // una vez que llega puede que haya muerto el enemigo 
         {
-            currentState = SoldierState.Attacking;
-            enabled = false;
+            if(currentEnemy != null)
+            {
+                currentState = SoldierState.Attacking;
+                currentEnemy.GetComponent<Enemy>().attack();
+                currentRutine = StartCoroutine(rutineAttack());
+                enabled = false;
+            }
+            else
+            {
+                clearListEnemy();
+
+                if(listEnemies.Count > 0)
+                {
+                    checkListEnemies();
+                    stopEnemy(currentEnemy);
+                }
+                else
+                {
+                    currentState = SoldierState.MovingToGuard;
+                    targetPosition = startPosition;
+                    enabled = true;
+                }
+            }
         }
     }
 
@@ -82,10 +112,9 @@ public class Soldier : MonoBehaviour
     public void setInitialPos(Vector2 posTarget)
     {
         if(currentEnemy != null)
-        {
-            currentEnemy.GetComponent<Enemy>().Move(true);
-        }
-
+            currentEnemy.GetComponent<Enemy>().move(this,true);
+        
+        startPosition = posTarget;
         targetPosition = posTarget;
         currentState = SoldierState.MovingToGuard;
         enabled = true;
@@ -110,8 +139,6 @@ public class Soldier : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D coll)
     {
-        Debug.Log("entra pasad");
-
         if(!coll.gameObject.CompareTag("Enemy"))
             return;
         
@@ -174,7 +201,12 @@ public class Soldier : MonoBehaviour
         }
 
         if(goToEnemy)
+        {
+            if(currentRutine != null)
+                StopCoroutine(currentRutine);
+            
             stopEnemy(enemy);
+        }
     }
 
     public void checkListEnemies()
@@ -201,7 +233,7 @@ public class Soldier : MonoBehaviour
             if(!fellowsAtakingThisEnemy)
                 listUnattackedEnemy.Add(enemy);
         }
-        Debug.Log(listUnattackedEnemy.Count);
+        
         if(listUnattackedEnemy.Count == 0)
             currentEnemy = listEnemies[0];
         else
@@ -211,7 +243,7 @@ public class Soldier : MonoBehaviour
     private void stopEnemy(GameObject enemy)
     {   
         currentEnemy = enemy;
-        currentEnemy.GetComponent<Enemy>().Move(false);
+        currentEnemy.GetComponent<Enemy>().move(this,false);
         targetPosition = currentEnemy.transform.position;
         currentState = SoldierState.MovingToEnemy;
         enabled = true;
@@ -223,5 +255,78 @@ public class Soldier : MonoBehaviour
         fellows[index] = s;
     }
 
+    public void setLive(float cant)
+    {
+        life += cant;
+        if(life <= 0)
+        {
+            currentBarrak.spawnNewSoldier();
+            Destroy(gameObject);
+        }
+        else
+            StartCoroutine(hit());
+    }
+
+    private IEnumerator hit()
+    {
+        render.color = Color.red;
+        yield return new WaitForSeconds(.1f);
+        render.color = originalColor;
+    }
+
+    private IEnumerator rutineAttack()
+    {
+        Enemy enemy = currentEnemy.GetComponent<Enemy>();
+        while(currentState == SoldierState.Attacking)
+        {
+            if(currentEnemy != null)
+            {
+                enemy.setLive(-damage);
+                yield return new WaitForSeconds(frequency);
+            }
+            else
+            {   
+                break;
+            }
+        }
+
+        clearListEnemy();
+
+        if(OutOfRange())
+        {
+            currentState = SoldierState.MovingToGuard;
+            targetPosition = startPosition;
+            enabled = true;
+        }
+        else
+        {
+            if(listEnemies.Count > 0)
+            {
+                checkListEnemies();
+                stopEnemy(currentEnemy);
+            }
+            else
+            {
+                currentState = SoldierState.MovingToGuard;
+                targetPosition = startPosition;
+                enabled = true;
+            }
+        }
+    }
+
+    private bool OutOfRange()
+    {
+        float distance = Vector2.Distance(transform.position,startPosition);
+        if(distance > barrackRange + deltaBarrackRange)
+            return true;
+        else
+            return false;
+    }
+
+    private  void clearListEnemy() => listEnemies.RemoveAll(item => item == null);
+
     public GameObject getCurrentEnemy() => currentEnemy; 
+    public void setBarrakRange(float range) => barrackRange = range;
+    public void setDeltaBarrackRange(float deltaRange) => deltaBarrackRange = deltaRange;
+    public void setBarrak(StructBarraks barrak) => currentBarrak = barrak;
 }
