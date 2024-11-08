@@ -18,16 +18,16 @@ public class ButtonDestinySoldier : MonoBehaviour, InterfaceStructButton
     public void ListenerButton()
     {
         visualRange.SetActive(true);
-        estructure.ActivatedButton(false);
+        estructure.activatedButton(false);
         clickTerrain.ResetStructures();
         clickTerrain.enabled = false;
-        clickDestiny.setParametres(this,estructure.gameObject.transform.position, estructure.GetRange());
+        clickDestiny.setParametres(this,estructure.gameObject.transform.position, estructure.getRange());
         clickDestiny.enabled = true;
     }
     public void validPointDestination(Vector2 pos)
     {
         visualRange.SetActive(false);
-        estructure.MoveSoldiers(pos);
+        estructure.moveSoldiers(pos);
     }
     
     public void SetEnabledButton(bool state)

@@ -8,13 +8,13 @@ public class MoneyManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textMoney;
     [SerializeField] private ClickTerrain clickTerrain;
 
-    public int GetMoney()
+    public int getMoney()
     {
         int cantMoney = int.Parse(textMoney.text);
         return cantMoney;
     }
 
-    public void SetCantMoney(int cant)
+    public void setCantMoney(int cant)
     {
         int cantMoney = int.Parse(textMoney.text);
         cantMoney +=cant;
@@ -22,6 +22,6 @@ public class MoneyManager : MonoBehaviour
         StructBase structBase =  clickTerrain.GetCurrentStructure();
         
         if(structBase != null)
-            structBase.ActivatedButton(true);
+            structBase.activatedButton(true);
     }
 }

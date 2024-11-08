@@ -30,7 +30,7 @@ public class StructBarraks : StructBase
         posibleSpot = new List<Vector2>();    
         
         foreach(GameObject spot in listSpot)
-            CheckPosibleSpot(spot.transform.position);
+            checkPosibleSpot(spot.transform.position);
         
         if(posibleSpot.Count == 0)
             return;
@@ -43,18 +43,37 @@ public class StructBarraks : StructBase
 
     protected void spawnSoldier()
     {
-        SearchPositionSoldier();
+        searchPositionSoldier();
 
         for(int i = 0; i < 3; i++) // 3 por ahora, no jodas
         {
             GameObject soldierInstantiate = Instantiate(soldier,transform.position,Quaternion.identity);
             Soldier sol = soldierInstantiate.GetComponent<Soldier>();
-            sol.SetInitialPos(startPos[i]);
+            sol.setInitialPos(startPos[i]);
             soldiers[i] = soldierInstantiate;
+        }
+
+        for(int i =0 ; i < 3; i++)
+        {
+            GameObject soldier = soldiers[i];
+            Soldier s = soldier.GetComponent<Soldier>();
+            
+            int index = 0;
+            for(int j = 0 ; j < 3; j++)
+            {
+                
+                if(j == i)
+                    continue;
+
+                GameObject soldierAux = soldiers[j];
+
+                s.setFellow(soldierAux,index);
+                index++;
+            }
         }
     }
 
-    protected void SearchPositionSoldier()
+    protected void searchPositionSoldier()
     {
 
         if(dir == Vector2.up)
@@ -103,7 +122,7 @@ public class StructBarraks : StructBase
         }
     }
 
-    private void CheckPosibleSpot(Vector2 pos)
+    private void checkPosibleSpot(Vector2 pos)
     {
         bool isWalkable = gridManager.IsWalkable(pos);
         
@@ -111,7 +130,7 @@ public class StructBarraks : StructBase
             posibleSpot.Add(pos);
     }
 
-    public override void  DestroyStructure()
+    public override void  destroyStructure()
     {
         foreach(GameObject soldier in soldiers)
             Destroy(soldier);
@@ -120,7 +139,7 @@ public class StructBarraks : StructBase
         Destroy(gameObject);
     }
 
-    public override void MoveSoldiers(Vector2 pos)
+    public override void moveSoldiers(Vector2 pos)
     {
         for(int i = 0; i < 3; i++)
         {
@@ -132,7 +151,7 @@ public class StructBarraks : StructBase
             Soldier s = soldier.GetComponent<Soldier>();
             Vector2 finalPos = pos + formationOffsets[i];
             
-            s.SetInitialPos(finalPos);
+            s.setInitialPos(finalPos);
         }
     }
 }

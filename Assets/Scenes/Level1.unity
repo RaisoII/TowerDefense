@@ -624,9 +624,10 @@ MonoBehaviour:
   waves:
   - timeBeforeWave: 3
     enemies:
-    - {fileID: 5139193974657594151, guid: 6baaf7e0acf3c9146a79a42a0bae85fb, type: 3}
-    - {fileID: 5139193974657594151, guid: 6baaf7e0acf3c9146a79a42a0bae85fb, type: 3}
-  - timeBeforeWave: 5
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+  - timeBeforeWave: 10000
     enemies:
     - {fileID: 5139193974657594151, guid: 6baaf7e0acf3c9146a79a42a0bae85fb, type: 3}
     - {fileID: 5139193974657594151, guid: 6baaf7e0acf3c9146a79a42a0bae85fb, type: 3}

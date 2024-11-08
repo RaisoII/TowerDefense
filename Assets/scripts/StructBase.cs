@@ -24,14 +24,14 @@ public abstract class StructBase : MonoBehaviour
         for(int i = 0; i < prefabsStructures.Count;i++)
         {
             GameObject prefab = prefabsStructures[i];
-            costStructure = prefab.GetComponent<StructBase>().GetCost();
+            costStructure = prefab.GetComponent<StructBase>().getCost();
             GameObject button = listStructuresButton[i];
             button.transform.GetChild(2).gameObject.GetComponent<TextMeshPro>().text = ""+costStructure;
         }
     }    
-    public void ActivatedButton(bool state)
+    public void activatedButton(bool state)
     {
-        int cantMoney = moneyManager.GetMoney();
+        int cantMoney = moneyManager.getMoney();
         foreach(GameObject button in listStructuresButton)
         {
             button.SetActive(state);
@@ -69,13 +69,13 @@ public abstract class StructBase : MonoBehaviour
         }
     }
 
-    public bool GetStateButton() => currentState;
-    public void SetParent(StructEmpty parent) => this.parent = parent;
-    public StructEmpty GetParent() => parent;
-    public int GetCost() => cost;
+    public bool getStateButton() => currentState;
+    public void setParent(StructEmpty parent) => this.parent = parent;
+    public StructEmpty getParent() => parent;
+    public int getCost() => cost;
 
-    public float GetRange() => range;
-    public abstract void DestroyStructure();
+    public float getRange() => range;
+    public abstract void destroyStructure();
     
-    public abstract void MoveSoldiers(Vector2 pos);
+    public abstract void moveSoldiers(Vector2 pos);
 }

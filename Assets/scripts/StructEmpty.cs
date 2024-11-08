@@ -12,17 +12,17 @@ public class StructEmpty : StructBase
     
         GameObject prefabInstantiate = Instantiate(structure,transform.position,Quaternion.identity);
         StructBase structBase = prefabInstantiate.GetComponent<StructBase>();
-        structBase.SetParent(this);
-        moneyManager.SetCantMoney(-structBase.GetCost());
-        ActivatedButton(false);
+        structBase.setParent(this);
+        moneyManager.setCantMoney(-structBase.getCost());
+        activatedButton(false);
     }
-    public override void  DestroyStructure(){}
+    public override void  destroyStructure(){}
     
-    public override void MoveSoldiers(Vector2 pos){}
+    public override void moveSoldiers(Vector2 pos){}
 
     public void DestroyStructure(int cost)
     {
         gameObject.GetComponent<EdgeCollider2D>().enabled = true;
-        moneyManager.SetCantMoney(Mathf.RoundToInt(50*cost/100f)); // 50% de reingresos del costo original
+        moneyManager.setCantMoney(Mathf.RoundToInt(50*cost/100f)); // 50% de reingresos del costo original
     }
 }

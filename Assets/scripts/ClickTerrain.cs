@@ -26,7 +26,7 @@ public class ClickTerrain : MonoBehaviour
             {
                 if(currentStruct != null)
                 {
-                    currentStruct.ActivatedButton(false);
+                    currentStruct.activatedButton(false);
                     currentStruct = null;
                     previousStruct = null;
                 }
@@ -44,16 +44,16 @@ public class ClickTerrain : MonoBehaviour
                 
                 if(currentStruct == previousStruct) // si apreto la misma estructura 
                 {
-                    bool currentState = currentStruct.GetStateButton();
-                    currentStruct.ActivatedButton(!currentState);
+                    bool currentState = currentStruct.getStateButton();
+                    currentStruct.activatedButton(!currentState);
                     return;
                 }
                 else
                 {
                     if(previousStruct != null)
-                        previousStruct.ActivatedButton(false);
+                        previousStruct.activatedButton(false);
                     
-                    currentStruct.ActivatedButton(true);
+                    currentStruct.activatedButton(true);
                     previousStruct = currentStruct;
                 }
             }

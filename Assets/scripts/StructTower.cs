@@ -22,13 +22,13 @@ public class StructTower : StructBase
         posShot = new Vector2(transform.position.x,transform.position.y + heightShot);
     }
 
-    public override void DestroyStructure()
+    public override void destroyStructure()
     {
         parent.DestroyStructure(cost);
         Destroy(gameObject);
     }
 
-    private IEnumerator Atack()
+    private IEnumerator attack()
     {  
         while(true)
         {
@@ -65,10 +65,10 @@ public class StructTower : StructBase
         if(!rutineRun)
         {
             currentEnemy = coll.gameObject;
-            StartCoroutine(Atack());
+            StartCoroutine(attack());
             rutineRun = true;
         }
     }
     
-    public override void MoveSoldiers(Vector2 pos){}
+    public override void moveSoldiers(Vector2 pos){}
 }
