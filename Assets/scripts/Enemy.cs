@@ -20,8 +20,10 @@ public class Enemy : MonoBehaviour
     private Coroutine currentRutine;
     private bool attacking;
     private MoneyManager moneyManager;
+    private List<Soldier> enemiesAttacking;
     private void Awake()
     {
+        enemiesAttacking = new List<Soldier>();
         moneyManager = GameObject.Find("scriptsGenerales").GetComponent<MoneyManager>();
         currentSpeed = speed;
         attacking = false;
@@ -101,22 +103,31 @@ public class Enemy : MonoBehaviour
     public void move(Soldier currentEnemy,bool state)
     {
         if(!state)
-            this.currentEnemy = currentEnemy;
+        {
+            if(this.currentEnemy == null)
+                this.currentEnemy = currentEnemy;
+            
+            enemiesAttacking.Add(currentEnemy);
+        }
         else
         {
             attacking = false;
             this.currentEnemy = null;
             
-            if(currentRutine != null)
+            if(attacking)
                 StopCoroutine(currentRutine);
+            
+            deleteEnemies();
         }
 
         enabled = state;
     }
 
+    private void deleteEnemies() => enemiesAttacking.Clear();
+
     public void attack()
     {
-        if(currentRutine == null)
+        if(!attacking)
         {
             currentSpeed = 0;
             attacking = true;
@@ -136,9 +147,27 @@ public class Enemy : MonoBehaviour
             else
                 break;
         }
+
+        List<Soldier> deleteSoldier = new List<Soldier>();
+
+        foreach(Soldier s in enemiesAttacking)
+        {
+            if(s == null  || s.getCurrentEnemy() != gameObject)
+                deleteSoldier.Add(s);
+            else
+                currentEnemy = s;
+        }
+
+        foreach(Soldier soldier in deleteSoldier)
+            enemiesAttacking.Remove(soldier);
         
-        currentSpeed = speed;
-        attacking = false;
-        enabled = true;
+        if(currentEnemy != null)
+            currentRutine = StartCoroutine(rutineAttack());
+        else
+        {
+            currentSpeed = speed;
+            attacking = false;
+            enabled = true;
+        }
     }
 }

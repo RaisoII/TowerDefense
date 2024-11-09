@@ -46,6 +46,7 @@ public class ClickTerrain : MonoBehaviour
                 {
                     bool currentState = currentStruct.getStateButton();
                     currentStruct.activatedButton(!currentState);
+                    currentStruct = null;
                     return;
                 }
                 else
