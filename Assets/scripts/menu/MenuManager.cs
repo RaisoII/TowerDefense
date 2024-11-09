@@ -1,0 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+public class MenuManager : MonoBehaviour
+{
+    [SerializeField] private AudioClip music;
+    [SerializeField] private GameObject menuButtons,optionButtons;
+    [SerializeField] private Slider sliderMusic, sliderSound;
+
+    private void Start()
+    {
+        SoundManager.instance.playMusic(music,true);
+    }
+    public void loadEscene(string name) => SceneManager.LoadScene(name);
+
+    public void OnSliderValueChanged(int index)
+    {
+        if(index == 0)
+            SoundManager.instance.SetMusicVolume(sliderMusic.value / 100f);
+        else
+            SoundManager.instance.setSFXVolume(sliderSound.value / 100f);
+    } 
+
+    public void changedPanel()
+    {
+        if(menuButtons.activeSelf)
+        {
+            menuButtons.SetActive(false);
+            optionButtons.SetActive(true);
+        }
+        else
+        {
+            optionButtons.SetActive(false);
+            menuButtons.SetActive(true);
+        }
+    }
+}

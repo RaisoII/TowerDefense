@@ -13,7 +13,7 @@ public class ClickTerrain : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetMouseButtonDown(0))
             CheckPointClick();
     }
 
@@ -60,6 +60,7 @@ public class ClickTerrain : MonoBehaviour
             }
             else if(hit.collider.CompareTag("StructButton"))
             {
+                currentStruct = null;
                 InterfaceStructButton button = hit.collider.gameObject.GetComponent<InterfaceStructButton>();
                 button.ListenerButton();
             }

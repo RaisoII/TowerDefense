@@ -10,4 +10,6 @@ public class Wave
 
     [Tooltip("Lista de enemigos que se spawnearán en esta oleada")]
     public List<GameObject> enemies;
+    [Tooltip("cancion que sonará cuando se invoque esta oleada")]
+    public AudioClip music;
 }
