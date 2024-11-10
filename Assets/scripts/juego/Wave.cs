@@ -10,6 +10,9 @@ public class Wave
 
     [Tooltip("Lista de enemigos que se spawnearán en esta oleada")]
     public List<GameObject> enemies;
+    
+    [Tooltip("es camcion loopeable??")]
+    public bool isLoop;
     [Tooltip("cancion que sonará cuando se invoque esta oleada")]
     public AudioClip music;
 }

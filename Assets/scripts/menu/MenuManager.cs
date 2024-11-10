@@ -12,7 +12,13 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        SoundManager.instance.playMusic(music,true);
+        StartCoroutine(waitingSecond());
+    }
+    private IEnumerator waitingSecond()
+    {
+        yield return new WaitForSeconds(1);
+        if(!SoundManager.instance.isPlay()) // para cuando vuelve al menu, hay veces donde se esta reproduciendo musica ya.
+            SoundManager.instance.playMusic(music,true,false);
     }
     public void loadEscene(string name) => SceneManager.LoadScene(name);
 

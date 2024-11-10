@@ -2268,7 +2268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161545412f1a4c14f809834c748df84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  music: {fileID: 8300000, guid: 04b297611161d8c49910addce54d5799, type: 3}
+  music: {fileID: 8300000, guid: 1533ce53dd199c34aad07a976b0d8b30, type: 3}
   menuButtons: {fileID: 217354974}
   optionButtons: {fileID: 1392058590}
   sliderMusic: {fileID: 143313718}

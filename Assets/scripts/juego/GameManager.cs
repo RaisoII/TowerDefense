@@ -9,18 +9,28 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textLife;
     [SerializeField] private GameObject textLose,textWin;
+    [SerializeField] private AudioClip startMusic,winMusic,loseMusic;
+    [SerializeField] private float timeReturnWin,timeReturnLose;
     private List<GameObject> lastEnemies;
 
+
+    private void Start()
+    {
+        SoundManager.instance.changedMusic(startMusic,false,false);
+    }
     public void setNewValueLife()
     {
         int value = int.Parse(textLife.text);
         value--;
-        textLife.text = ""+value;
+        
+        if(value >= 0)
+            textLife.text = ""+value;
         
         if(value == 0)
         {
+            SoundManager.instance.changedMusic(winMusic,false,false);
             textLose.SetActive(true);
-            StartCoroutine(returnRutine());
+            StartCoroutine(returnRutine(false));
         }
     }
 
@@ -35,7 +45,7 @@ public class GameManager : MonoBehaviour
         {
             enemyLive = false;
             
-            foreach(GameObject enemy in  enemies)
+            foreach(GameObject enemy in  lastEnemies)
             {
                 if(enemy != null)
                 {
@@ -46,8 +56,9 @@ public class GameManager : MonoBehaviour
 
             if(!enemyLive)
             {
+                SoundManager.instance.changedMusic(winMusic,false,false);
                 textWin.SetActive(true);
-                StartCoroutine(returnRutine());
+                StartCoroutine(returnRutine(true));
                 break;
             }
             
@@ -55,9 +66,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IEnumerator returnRutine()
+    private IEnumerator returnRutine(bool isWin)
     {
-        yield return new WaitForSeconds(2.5f);
+        if(isWin)
+            yield return new WaitForSeconds(timeReturnWin);
+        else
+            yield return new WaitForSeconds(timeReturnLose);
         SceneManager.LoadScene("Menu");
     }
 

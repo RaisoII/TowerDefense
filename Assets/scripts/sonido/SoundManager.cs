@@ -25,22 +25,25 @@ public class SoundManager : MonoBehaviour
     }
 
     // Función para reproducir música
-    public void playMusic(AudioClip clip,bool fadeIn)
+    public void playMusic(AudioClip clip,bool fadeIn, bool isLoop)
     {
         music.clip = clip;
+        music.loop = isLoop;
         music.Play();
         if(fadeIn)
             StartCoroutine(fadeInRutine());
     }
 
-    public void changedMusic(AudioClip clip) => StartCoroutine(changedMusicRutine(clip));
+    public void changedMusic(AudioClip clip,bool isLoop,bool fadeIn) => StartCoroutine(changedMusicRutine(clip,isLoop,fadeIn));
 
-    private IEnumerator changedMusicRutine(AudioClip clip)
+    private IEnumerator changedMusicRutine(AudioClip clip,bool isLoop,bool fadeIn)
     {
         fadeOutMusic();
         yield return new WaitForSeconds(3);
         music.clip = clip;
+        music.loop = isLoop;
         music.Play();
+        if(fadeIn)
             StartCoroutine(fadeInRutine());
     }
 
@@ -113,4 +116,5 @@ public class SoundManager : MonoBehaviour
     } 
 
     public void setMusicaVolumen(float volume) => music.volume = volume;
+    public bool isPlay() => music.isPlaying;
 }
