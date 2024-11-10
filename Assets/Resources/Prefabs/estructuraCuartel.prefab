@@ -427,10 +427,12 @@ MonoBehaviour:
   buttonDelete: {fileID: 7873892795726359414}
   buttonDestinySoldier: {fileID: 4549430381308397090}
   gameObjectRange: {fileID: 3571153030749278390}
-  cost: 20
+  cost: 25
   range: 2.25
   enabledColor: {r: 1, g: 1, b: 1, a: 1}
   disabledColor: {r: 0.4509804, g: 0.4392157, b: 0.4392157, a: 1}
+  clipConstruction: {fileID: 0}
+  clipDestruction: {fileID: 0}
   soldier: {fileID: 7930889831363977997, guid: b5068f32535219a41b6b7ff35b8c888c, type: 3}
   cantSoldier: 3
   listSpot:

@@ -9,17 +9,26 @@ public class StructTower : StructBase
     [SerializeField] private GameObject projectile;
     [SerializeField] private float heightShot;
     [SerializeField] private int damage;
+    [SerializeField] private AudioClip arrowShoot;
     private Vector2 posShot;
     private List<GameObject> enemies;
     private GameObject currentEnemy;
     private bool rutineRun;
+    private Vector2 nextPoint;
 
     protected override void Start()
     {
         base.Start();
+        calculateNextPoint();
         rutineRun = false;
         enemies = new List<GameObject>();
         posShot = new Vector2(transform.position.x,transform.position.y + heightShot);
+    }
+
+    private void calculateNextPoint()
+    {
+        GameObject lastPoint =  GameObject.Find("scriptsGenerales").GetComponent<GameManager>().getLastWayPoint();
+        nextPoint = lastPoint.transform.position;
     }
 
     public override void destroyStructure()
@@ -32,30 +41,24 @@ public class StructTower : StructBase
     {  
         while(true)
         {
+            currentEnemy = searchFirstEnemy();
+            
             if(currentEnemy == null)
             {
-                enemies.RemoveAt(0);
-                if(enemies.Count == 0)
-                {
-                    rutineRun = false;
-                    break;
-                }                
-                else
-                {
-                    currentEnemy = searchNewEnemy();
-                    if(currentEnemy == null)
-                        break;
-                }
+                rutineRun = false;
+                break;
             }
 
             float distance = Vector2.Distance(transform.position,currentEnemy.transform.position);
             
             if(distance > range + deltaRange)
             {
+                enemies.Remove(currentEnemy);
                 currentEnemy = null;
                 continue;
             }
 
+            SoundManager.instance.playSFX(arrowShoot,false);
             GameObject instanceProjectile = Instantiate(projectile,posShot,Quaternion.identity);
             ParabolicShotDefinitive parabolicShot = instanceProjectile.GetComponent<ParabolicShotDefinitive>();
             parabolicShot.SetMovement(posShot,currentEnemy,damage);
@@ -63,13 +66,30 @@ public class StructTower : StructBase
         }
     }
 
-    private GameObject searchNewEnemy()
+    private GameObject searchFirstEnemy()
     {
         enemies.RemoveAll(item => item == null);
+        
         if(enemies.Count == 0)
             return null;
-        else
+        
+        if(enemies.Count == 1)
             return enemies[0];
+        
+        GameObject closestEnemy = null;
+        float minDistance = Mathf.Infinity;
+
+        foreach (GameObject enemy in enemies)
+        {
+            float distance = Vector3.Distance(nextPoint, enemy.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closestEnemy = enemy;
+            }
+        }
+
+        return closestEnemy;
     }
 
     public void detectedEnemy(Collider2D coll)

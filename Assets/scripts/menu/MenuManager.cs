@@ -17,6 +17,7 @@ public class MenuManager : MonoBehaviour
     private IEnumerator waitingSecond()
     {
         yield return new WaitForSeconds(1);
+
         if(!SoundManager.instance.isPlay()) // para cuando vuelve al menu, hay veces donde se esta reproduciendo musica ya.
             SoundManager.instance.playMusic(music,true,false);
     }

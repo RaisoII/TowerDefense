@@ -177,6 +177,8 @@ MonoBehaviour:
   range: 0
   enabledColor: {r: 1, g: 1, b: 1, a: 1}
   disabledColor: {r: 0.4509804, g: 0.4392157, b: 0.4392157, a: 1}
+  clipConstruction: {fileID: 8300000, guid: ba4fd2d42d4441142a652f3da80fbce3, type: 3}
+  clipDestruction: {fileID: 8300000, guid: bb5376478cf22a046bc0339bb866bb5f, type: 3}
 --- !u!68 &3098224633394945164
 EdgeCollider2D:
   m_ObjectHideFlags: 0

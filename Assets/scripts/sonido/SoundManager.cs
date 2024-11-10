@@ -38,8 +38,14 @@ public class SoundManager : MonoBehaviour
 
     private IEnumerator changedMusicRutine(AudioClip clip,bool isLoop,bool fadeIn)
     {
-        fadeOutMusic();
-        yield return new WaitForSeconds(3);
+        if(music.isPlaying)
+        {
+            fadeOutMusic();
+            yield return new WaitForSeconds(3);
+        }
+        else 
+            yield return new WaitForEndOfFrame();
+            
         music.clip = clip;
         music.loop = isLoop;
         music.Play();
@@ -73,21 +79,21 @@ public class SoundManager : MonoBehaviour
         OnMusicEnd?.Invoke();
     }
 
-    public void fadeOutMusic() => StartCoroutine(fadeOutRutine());
+    public void fadeOutMusic() => StartCoroutine(fadeOutRutine(music));
 
-    private IEnumerator fadeOutRutine()
+    private IEnumerator fadeOutRutine(AudioSource source)
     {
         float duration = 3f; // Duración del desvanecimiento en segundos
-        float initialVolume = music.volume;
+        float initialVolume = source.volume;
 
         for (float t = 0; t < duration; t += Time.deltaTime)
         {
-            music.volume = Mathf.Lerp(initialVolume, 0, t / duration);
+            source.volume = Mathf.Lerp(initialVolume, 0, t / duration);
             yield return null;
         }
 
-        music.Stop();   // Detiene la reproducción si es necesario
-        music.volume = initialVolume;
+        source.Stop();   // Detiene la reproducción si es necesario
+        source.volume = initialVolume;
     }
 
     // Función para reproducir efectos de sonido
@@ -102,6 +108,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    public void fadeOutSFXLoop() => StartCoroutine(fadeOutRutine(sfxLoop));
     public void StopAudioLoop() => sfxLoop.Stop();
 
     // Función para cambiar el volumen de la música

@@ -40,7 +40,8 @@ public class WaveManager : MonoBehaviour
                 if(time == 0  || skipWaveWait)
                     break;
             }
-
+            
+            nextWave.interactable = false;
             lastEnemies = spawnEnemies.SpawnFunctionEnemies(wave.enemies);
             
             if(wave.music != null)

@@ -239,7 +239,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 136382810, guid: 3b023a4a0d3e80d4fb64dd89968af00d, type: 3}
-  m_Color: {r: 0.5454343, g: 0.8917578, b: 0.9716981, a: 0.5019608}
+  m_Color: {r: 0.8392157, g: 0.24313726, b: 0.21960784, a: 0.5019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -349,15 +349,18 @@ MonoBehaviour:
   buttonDelete: {fileID: 7873892795726359414}
   buttonDestinySoldier: {fileID: 0}
   gameObjectRange: {fileID: 8586262500821129994}
-  cost: 10
-  range: 3
+  cost: 15
+  range: 5
   enabledColor: {r: 1, g: 1, b: 1, a: 1}
   disabledColor: {r: 0.4509804, g: 0.4392157, b: 0.4392157, a: 1}
+  clipConstruction: {fileID: 0}
+  clipDestruction: {fileID: 0}
   deltaRange: 0.2
   cadence: 2
   projectile: {fileID: 6854941420380304020, guid: 597995e91de4d2b4eab3f1c5cf30ef09, type: 3}
   heightShot: 1.8
-  damage: 5
+  damage: 3
+  arrowShoot: {fileID: 8300000, guid: 58c173f984ce01c4fbf7762c8aead8e5, type: 3}
 --- !u!1001 &2031313512281475983
 PrefabInstance:
   m_ObjectHideFlags: 0

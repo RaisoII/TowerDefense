@@ -98,11 +98,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2dd0ed61ab8f4d44b5edd7ce8b1e1fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 10
+  totalLife: 20
   damage: 1
   frequency: 1
   speed: 1
   attackRange: 0.2
+  clipHit: {fileID: 8300000, guid: 942c07f1ceb0fdc489f7b11f02b6873e, type: 3}
 --- !u!58 &6175557701781729546
 CircleCollider2D:
   m_ObjectHideFlags: 0

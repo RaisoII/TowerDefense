@@ -12,6 +12,7 @@ public abstract class StructBase : MonoBehaviour
     [SerializeField] protected int cost;
     [SerializeField] protected float range;
     [SerializeField] protected Color enabledColor,disabledColor;
+    [SerializeField] protected AudioClip clipConstruction,clipDestruction;
     protected MoneyManager moneyManager;
     protected bool currentState;
     protected StructEmpty parent; // para los edificios saber que pedazo de tierra lo invocó

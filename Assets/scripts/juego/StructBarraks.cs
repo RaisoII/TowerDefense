@@ -119,23 +119,23 @@ public class StructBarraks : StructBase
         {
             startPos[0] = finalPos + .1f*Vector2.right;
             startPos[1] = finalPos + .3f*Vector2.up + .3f*Vector2.left;
-            startPos[2] = finalPos - .3f*Vector2.down + .3f*Vector2.left;
+            startPos[2] = finalPos + .3f*Vector2.down + .3f*Vector2.left;
 
             
             formationOffsets[0] = .1f*Vector2.right;
             formationOffsets[1] = .3f*Vector2.up + .3f*Vector2.left;
-            formationOffsets[2] = - .3f*Vector2.down + .3f*Vector2.left;
+            formationOffsets[2] = .3f*Vector2.down + .3f*Vector2.left;
         }
         else
         {
             startPos[0] = finalPos + .1f*Vector2.left;
             startPos[1] = finalPos + .3f*Vector2.up + .3f*Vector2.right;
-            startPos[2] = finalPos - .3f*Vector2.down + .3f*Vector2.right;
+            startPos[2] = finalPos + .3f*Vector2.down + .3f*Vector2.right;
 
             
             formationOffsets[0] = .1f*Vector2.left;
             formationOffsets[1] = .3f*Vector2.up + .3f*Vector2.right;
-            formationOffsets[2] = - .3f*Vector2.down + .3f*Vector2.right;
+            formationOffsets[2] = .3f*Vector2.down + .3f*Vector2.right;
         }
     }
 

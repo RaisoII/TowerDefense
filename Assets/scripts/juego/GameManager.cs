@@ -9,14 +9,16 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textLife;
     [SerializeField] private GameObject textLose,textWin;
-    [SerializeField] private AudioClip startMusic,winMusic,loseMusic;
+    [SerializeField] private AudioClip SFXloopClip, startMusic,winMusic,loseMusic;
     [SerializeField] private float timeReturnWin,timeReturnLose;
+    [SerializeField] GameObject lastWayPoint;
     private List<GameObject> lastEnemies;
 
 
     private void Start()
     {
-        SoundManager.instance.changedMusic(startMusic,false,false);
+        SoundManager.instance.changedMusic(startMusic,true,false);
+        SoundManager.instance.playSFX(SFXloopClip,true);
     }
     public void setNewValueLife()
     {
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour
         if(value == 0)
         {
             SoundManager.instance.changedMusic(winMusic,false,false);
+            SoundManager.instance.fadeOutSFXLoop();
             textLose.SetActive(true);
             StartCoroutine(returnRutine(false));
         }
@@ -56,6 +59,7 @@ public class GameManager : MonoBehaviour
 
             if(!enemyLive)
             {
+                SoundManager.instance.fadeOutSFXLoop();
                 SoundManager.instance.changedMusic(winMusic,false,false);
                 textWin.SetActive(true);
                 StartCoroutine(returnRutine(true));
@@ -76,5 +80,6 @@ public class GameManager : MonoBehaviour
     }
 
     public void setLife(int value) => textLife.text = ""+value;
+    public GameObject getLastWayPoint() =>  lastWayPoint;
     
 }

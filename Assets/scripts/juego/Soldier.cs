@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Soldier : MonoBehaviour
 {
-    [SerializeField] private float life;
+    [SerializeField] private float totalLife;
     [SerializeField] private int damage;
     [SerializeField] private float frequency;
     [SerializeField] private float speed;
     [SerializeField] private float attackRange;
+    [SerializeField] private AudioClip clipHit;
     private float barrackRange;
+    private float actualLife;
     private float deltaBarrackRange;
     private Soldier [] fellows;
     private Vector2 targetPosition;
@@ -26,6 +28,7 @@ public class Soldier : MonoBehaviour
     
     private void Awake()
     {
+        actualLife = totalLife;
         render = GetComponent<SpriteRenderer>();
         originalColor = render.color;
         fellows = new Soldier[2];
@@ -78,6 +81,10 @@ public class Soldier : MonoBehaviour
             {
                 currentState = SoldierState.Attacking;
                 currentEnemy.GetComponent<Enemy>().attack();
+                
+                if(currentRutine != null)
+                    StopCoroutine(currentRutine);
+
                 currentRutine = StartCoroutine(rutineAttack());
                 enabled = false;
             }
@@ -257,8 +264,8 @@ public class Soldier : MonoBehaviour
 
     public void setLive(float cant)
     {
-        life += cant;
-        if(life <= 0)
+        actualLife += cant;
+        if(actualLife <= 0)
         {
             currentBarrak.spawnNewSoldier();
             Destroy(gameObject);
@@ -281,6 +288,7 @@ public class Soldier : MonoBehaviour
         {
             if(currentEnemy != null)
             {
+                SoundManager.instance.playSFX(clipHit,false);
                 enemy.setLive(-damage);
                 yield return new WaitForSeconds(frequency);
             }
@@ -305,6 +313,7 @@ public class Soldier : MonoBehaviour
             }
             else
             {
+                currentRutine =  StartCoroutine(healtRutine());
                 currentState = SoldierState.MovingToGuard;
                 targetPosition = startPosition;
                 enabled = true;
@@ -319,6 +328,15 @@ public class Soldier : MonoBehaviour
             return true;
         else
             return false;
+    }
+
+    private IEnumerator healtRutine()
+    {
+        while(actualLife < totalLife)
+        {
+            yield return new WaitForSeconds(1f);
+            actualLife++;
+        }
     }
 
     private  void clearListEnemy() => listEnemies.RemoveAll(item => item == null);
