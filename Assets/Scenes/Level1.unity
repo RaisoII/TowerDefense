@@ -758,8 +758,54 @@ MonoBehaviour:
   gameManager: {fileID: 441079093}
   spawnEnemies: {fileID: 1279256330}
   waves:
-  - timeBeforeWave: 7
+  - timeBeforeWave: 1
     enemies:
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    music: {fileID: 0}
+  - timeBeforeWave: 15
+    enemies:
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    music: {fileID: 0}
+  - timeBeforeWave: 30
+    enemies:
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    music: {fileID: 0}
+  - timeBeforeWave: 40
+    enemies:
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    music: {fileID: 0}
+  - timeBeforeWave: 50
+    enemies:
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
+    - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
     - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
     music: {fileID: 0}
   textWave: {fileID: 2085808496}
@@ -1717,7 +1763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6585a745b215a442af5f1a156f4f4be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cantLife: 1
+  cantLife: 15
 --- !u!61 &949279347
 BoxCollider2D:
   m_ObjectHideFlags: 0

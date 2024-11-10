@@ -79,7 +79,7 @@ public class Enemy : MonoBehaviour
 
     public float getVelocity() => currentSpeed;
 
-    public Vector2 getNextDestination() => nextPoint.GetPos();
+    public Vector2 getNextDestination() => target;
 
     public void setLive(float cant)
     {
@@ -150,21 +150,25 @@ public class Enemy : MonoBehaviour
 
         List<Soldier> deleteSoldier = new List<Soldier>();
 
-        foreach(Soldier s in enemiesAttacking)
+        foreach(Soldier s in enemiesAttacking) // si están muertos o están atacando a otros los borro
         {
             if(s == null  || s.getCurrentEnemy() != gameObject)
                 deleteSoldier.Add(s);
-            else
-                currentEnemy = s;
         }
-
+    
         foreach(Soldier soldier in deleteSoldier)
             enemiesAttacking.Remove(soldier);
+
+        foreach(Soldier soldier in deleteSoldier) // los que quedan (si es que quedan) serán los nuevos atacados
+        {
+            if(soldier.getAttacking())
+                currentEnemy = soldier;       
+        }
         
         if(currentEnemy != null)
             currentRutine = StartCoroutine(rutineAttack());
-        else
-        {
+        else if(currentEnemy == null && enemiesAttacking.Count == 0)
+        { 
             currentSpeed = speed;
             attacking = false;
             enabled = true;

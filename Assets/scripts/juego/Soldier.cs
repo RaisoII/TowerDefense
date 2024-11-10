@@ -242,10 +242,10 @@ public class Soldier : MonoBehaviour
 
     private void stopEnemy(GameObject enemy)
     {   
+        currentState = SoldierState.MovingToEnemy;
         currentEnemy = enemy;
         currentEnemy.GetComponent<Enemy>().move(this,false);
         targetPosition = currentEnemy.transform.position;
-        currentState = SoldierState.MovingToEnemy;
         enabled = true;
     }
 
@@ -285,9 +285,7 @@ public class Soldier : MonoBehaviour
                 yield return new WaitForSeconds(frequency);
             }
             else
-            {   
                 break;
-            }
         }
 
         clearListEnemy();
@@ -329,4 +327,5 @@ public class Soldier : MonoBehaviour
     public void setBarrakRange(float range) => barrackRange = range;
     public void setDeltaBarrackRange(float deltaRange) => deltaBarrackRange = deltaRange;
     public void setBarrak(StructBarraks barrak) => currentBarrak = barrak;
+    public bool getAttacking() => currentState == SoldierState.Attacking;
 }

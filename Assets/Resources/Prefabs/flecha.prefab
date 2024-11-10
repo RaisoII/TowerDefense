@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2057905356861371788}
   - component: {fileID: 273863968641847979}
   - component: {fileID: 8284276255936812699}
-  - component: {fileID: -1580251032763023621}
+  - component: {fileID: -4725326108885725560}
   m_Layer: 0
   m_Name: flecha
   m_TagString: Untagged
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 2139297903, guid: 09e220ac6ee53154cb2c55324e878945, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -131,7 +131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.13, y: 0.16}
   m_EdgeRadius: 0
---- !u!114 &-1580251032763023621
+--- !u!114 &-4725326108885725560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,8 +140,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6854941420380304020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8b983db45039f74ea38b15b7ee88448, type: 3}
+  m_Script: {fileID: 11500000, guid: 727e8cedd1f0b52468d5ed6b2a2ce7da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  arcHeight: 2
+  startPoint: {x: 0, y: 0}
+  endPoint: {x: 0, y: 0}
+  flightTime: 1
+  heightFactor: 1

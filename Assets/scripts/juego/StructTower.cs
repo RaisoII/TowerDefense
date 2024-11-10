@@ -8,7 +8,7 @@ public class StructTower : StructBase
     [SerializeField] private float cadence;
     [SerializeField] private GameObject projectile;
     [SerializeField] private float heightShot;
-    [SerializeField] private float damage;
+    [SerializeField] private int damage;
     private Vector2 posShot;
     private List<GameObject> enemies;
     private GameObject currentEnemy;
@@ -41,10 +41,15 @@ public class StructTower : StructBase
                     break;
                 }                
                 else
-                    currentEnemy = enemies[0];
+                {
+                    currentEnemy = searchNewEnemy();
+                    if(currentEnemy == null)
+                        break;
+                }
             }
 
             float distance = Vector2.Distance(transform.position,currentEnemy.transform.position);
+            
             if(distance > range + deltaRange)
             {
                 currentEnemy = null;
@@ -52,10 +57,19 @@ public class StructTower : StructBase
             }
 
             GameObject instanceProjectile = Instantiate(projectile,posShot,Quaternion.identity);
-            ParabolicShot parabolicShot = instanceProjectile.GetComponent<ParabolicShot>();
+            ParabolicShotDefinitive parabolicShot = instanceProjectile.GetComponent<ParabolicShotDefinitive>();
             parabolicShot.SetMovement(posShot,currentEnemy,damage);
             yield return new WaitForSeconds(cadence);
         }
+    }
+
+    private GameObject searchNewEnemy()
+    {
+        enemies.RemoveAll(item => item == null);
+        if(enemies.Count == 0)
+            return null;
+        else
+            return enemies[0];
     }
 
     public void detectedEnemy(Collider2D coll)
