@@ -122,6 +122,8 @@ public class SoundManager : MonoBehaviour
         sfxSingle.volume = volume;
     } 
 
-    public void setMusicaVolumen(float volume) => music.volume = volume;
+    public void setMusicVolume(float volume) => music.volume = volume;
+    public float getMusicVolume() => music.volume;
+    public float getSFXvolume() => sfxSingle.volume;
     public bool isPlay() => music.isPlaying;
 }

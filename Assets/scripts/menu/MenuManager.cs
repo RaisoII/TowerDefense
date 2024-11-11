@@ -9,9 +9,12 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private AudioClip music;
     [SerializeField] private GameObject menuButtons,optionButtons;
     [SerializeField] private Slider sliderMusic, sliderSound;
+    [SerializeField] private AudioClip checkClip;
 
     private void Start()
     {
+        sliderMusic.value = SoundManager.instance.getMusicVolume() * 100;
+        sliderSound.value = SoundManager.instance.getSFXvolume() * 100;
         StartCoroutine(waitingSecond());
     }
     private IEnumerator waitingSecond()
@@ -28,7 +31,12 @@ public class MenuManager : MonoBehaviour
         if(index == 0)
             SoundManager.instance.SetMusicVolume(sliderMusic.value / 100f);
         else
+        {
+
             SoundManager.instance.setSFXVolume(sliderSound.value / 100f);
+            SoundManager.instance.playSFX(checkClip,false);
+        }
+            
     } 
 
     public void changedPanel()

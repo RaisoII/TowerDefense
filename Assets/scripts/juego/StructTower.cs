@@ -105,4 +105,5 @@ public class StructTower : StructBase
     }
     
     public override void moveSoldiers(Vector2 pos){}
+    public override void selectSoldier(bool state){}
 }

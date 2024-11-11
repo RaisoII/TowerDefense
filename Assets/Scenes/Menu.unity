@@ -2273,6 +2273,7 @@ MonoBehaviour:
   optionButtons: {fileID: 1392058590}
   sliderMusic: {fileID: 143313718}
   sliderSound: {fileID: 1057797058}
+  checkClip: {fileID: 8300000, guid: 942c07f1ceb0fdc489f7b11f02b6873e, type: 3}
 --- !u!1 &1464163029
 GameObject:
   m_ObjectHideFlags: 0

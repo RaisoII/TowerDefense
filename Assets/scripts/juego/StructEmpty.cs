@@ -20,6 +20,7 @@ public class StructEmpty : StructBase
     public override void  destroyStructure(){}
     
     public override void moveSoldiers(Vector2 pos){}
+    public override void selectSoldier(bool state){}
 
     public void DestroyStructure(int cost)
     {

@@ -46,7 +46,7 @@ public class StructBarraks : StructBase
 
     protected void spawnSoldier()
     {
-        searchPositionSoldier();
+        searchStartPosition(finalPos);
 
         for(int i = 0; i < 3; i++) // 3 por ahora, no jodas
             instantiateSoldier(i);
@@ -90,9 +90,8 @@ public class StructBarraks : StructBase
         }
     }
 
-    protected void searchPositionSoldier()
+    public void searchStartPosition(Vector2 finalPos)
     {
-
         if(dir == Vector2.up)
         {
             startPos[0] = finalPos + .1f*Vector2.up;
@@ -169,6 +168,19 @@ public class StructBarraks : StructBase
             Vector2 finalPos = pos + formationOffsets[i];
             
             s.setInitialPos(finalPos);
+        }
+
+        searchStartPosition(pos);
+    }
+
+    public override void selectSoldier(bool state)
+    {
+        foreach(GameObject soldier in soldiers)
+        {
+            if(soldier != null)
+            {
+                soldier.transform.GetChild(0).gameObject.SetActive(state);
+            }
         }
     }
     

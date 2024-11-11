@@ -19,6 +19,7 @@ public class ButtonDestinySoldier : MonoBehaviour, InterfaceStructButton
     {
         visualRange.SetActive(true);
         estructure.activatedButton(false);
+        estructure.selectSoldier(true);
         clickTerrain.ResetStructures();
         clickTerrain.enabled = false;
         clickDestiny.setParametres(this,estructure.gameObject.transform.position, estructure.getRange());
@@ -28,6 +29,7 @@ public class ButtonDestinySoldier : MonoBehaviour, InterfaceStructButton
     {
         visualRange.SetActive(false);
         estructure.moveSoldiers(pos);
+        estructure.selectSoldier(false);
     }
     
     public void SetEnabledButton(bool state)

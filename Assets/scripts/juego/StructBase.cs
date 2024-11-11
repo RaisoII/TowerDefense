@@ -79,4 +79,5 @@ public abstract class StructBase : MonoBehaviour
     public abstract void destroyStructure();
     
     public abstract void moveSoldiers(Vector2 pos);
+    public abstract void selectSoldier(bool state);
 }
