@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private SpawnEnemies spawnEnemies;
     [SerializeField] List<Wave> waves;
     [SerializeField] private TextMeshProUGUI textWave,textSecondsWave;
     [SerializeField] private Button nextWave;
@@ -42,7 +41,7 @@ public class WaveManager : MonoBehaviour
             }
             
             nextWave.interactable = false;
-            lastEnemies = spawnEnemies.SpawnFunctionEnemies(wave.enemies);
+            lastEnemies = wave.spawn.SpawnFunctionEnemies(wave.enemies);
             
             if(wave.music != null)
                 SoundManager.instance.playMusic(wave.music,true,wave.isLoop);

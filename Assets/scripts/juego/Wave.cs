@@ -5,14 +5,16 @@ using UnityEngine;
 [System.Serializable]
 public class Wave 
 {
-    [Tooltip("Tiempo de espera antes de iniciar esta oleada (en segundos)")]
-    public float timeBeforeWave;
-
-    [Tooltip("Lista de enemigos que se spawnearán en esta oleada")]
-    public List<GameObject> enemies;
-    
     [Tooltip("es camcion loopeable??")]
     public bool isLoop;
     [Tooltip("cancion que sonará cuando se invoque esta oleada")]
     public AudioClip music;
+    [Tooltip("spwan en el que se spawneara")]
+    public SpawnEnemies spawn;
+    [Tooltip("Tiempo de espera antes de iniciar esta oleada (en segundos)")]
+    public float timeBeforeWave;
+    [Tooltip("Lista de enemigos que se spawnearán en esta oleada")]
+    public List<GameObject> enemies;
+    
+    
 }
