@@ -25,9 +25,9 @@ public class EditionMode : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButton(0))
+        if(Input.GetKey(KeyCode.Space))
             enabledCellPrefab();
-        else if(Input.GetMouseButton(1))
+        else if(Input.GetKey(KeyCode.Z))
             disabledCellPrefab();
     }
 

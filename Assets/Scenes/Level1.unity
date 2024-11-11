@@ -1047,9 +1047,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b55fb4aaca41d64fb418924917f29e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 30
-  height: 30
-  cellSize: 0.5
+  width: 64
+  height: 64
+  cellSize: 0.25
 --- !u!114 &441079090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1313,9 +1313,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxZoom: 4.812946
   minZoom: 3
-  minX: 7.71
+  minX: 7.94
   minY: 4.82
-  maxX: 8.28
+  maxX: 7.94
   maxY: 11.2
 --- !u!1 &606929614
 GameObject:
@@ -1817,7 +1817,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -7.8999634, y: 12.300049}
+  m_AnchoredPosition: {x: -7.8999634, y: 12.300064}
   m_SizeDelta: {x: 61.0414, y: 61.0414}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &814501659
