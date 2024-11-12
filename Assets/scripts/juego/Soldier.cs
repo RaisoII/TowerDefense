@@ -35,7 +35,7 @@ public class Soldier : MonoBehaviour
         listEnemies = new List<GameObject>();
         currentState = SoldierState.MovingToGuard;
         enabled = false;
-        GetComponent<SpriteRenderer>().sprite = listSpriteRenders[Random.Range(0, listSpriteRenders.Length - 1)];
+        GetComponent<SpriteRenderer>().sprite = listSpriteRenders[Random.Range(0, listSpriteRenders.Length)];
     }
     private void Update()
     {
@@ -282,9 +282,9 @@ public class Soldier : MonoBehaviour
 
     private IEnumerator hit()
     {
-        render.color = Color.red;
+        render.material.color = Color.red;
         yield return new WaitForSeconds(.1f);
-        render.color = originalColor;
+        render.material.color = originalColor;
     }
 
     private IEnumerator rutineAttack()

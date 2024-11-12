@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 1858029900888195104}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.017, y: 0.066, z: 0}
-  m_LocalScale: {x: 1.8081272, y: 0.69117117, z: 1}
+  m_LocalPosition: {x: -0.0023, y: -0.001, z: 0}
+  m_LocalScale: {x: 0.44584092, y: 0.22325909, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3710624186708358638}
@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 5779365442285929087}
   - component: {fileID: 1399686155088084642}
   - component: {fileID: 6175557701781729546}
+  - component: {fileID: -1389296809309282211}
   m_Layer: 2
   m_Name: soldado
   m_TagString: Untagged
@@ -113,7 +114,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.811, y: 8.511, z: 0.4945016}
-  m_LocalScale: {x: 0.2408197, y: 0.3021947, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5032113663849150272}
@@ -139,7 +140,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: cf28b82f52080f542841520ce2d18d7e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -160,8 +161,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 1308886963, guid: 3b023a4a0d3e80d4fb64dd89968af00d, type: 3}
-  m_Color: {r: 0.9245283, g: 0.8652148, b: 0.3009078, a: 1}
+  m_Sprite: {fileID: 995192773, guid: 559ed8e89511f0e40a6293e44678e2fc, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -189,6 +190,9 @@ MonoBehaviour:
   speed: 1
   attackRange: 0.2
   clipHit: {fileID: 8300000, guid: 942c07f1ceb0fdc489f7b11f02b6873e, type: 3}
+  listSpriteRenders:
+  - {fileID: 995192773, guid: 559ed8e89511f0e40a6293e44678e2fc, type: 3}
+  - {fileID: 19207277, guid: 559ed8e89511f0e40a6293e44678e2fc, type: 3}
 --- !u!58 &6175557701781729546
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -221,6 +225,27 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.49999997}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 1
+--- !u!95 &-1389296809309282211
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7930889831363977997}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0281595011c59584ab5055d546b5943d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

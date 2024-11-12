@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Sprite[] listSpriteRenders;
     private void Awake()
     {
-        GetComponent<SpriteRenderer>().sprite = listSpriteRenders[Random.Range(0, listSpriteRenders.Length - 1)];
+        GetComponent<SpriteRenderer>().sprite = listSpriteRenders[Random.Range(0, listSpriteRenders.Length)];
         enemiesAttacking = new List<Soldier>();
         moneyManager = GameObject.Find("scriptsGenerales").GetComponent<MoneyManager>();
         currentSpeed = speed;
@@ -98,9 +98,9 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator hit()
     {
-        GetComponent<Animator>().SetBool("hit", true);
+        render.material.color = Color.red;
         yield return new WaitForSeconds(.25f);
-        GetComponent<Animator>().SetBool("hit", false);
+        render.material.color = originalColor;
     }
 
     public void move(Soldier currentEnemy,bool state)
