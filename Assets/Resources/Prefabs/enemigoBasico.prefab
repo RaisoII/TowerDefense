@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: -2006868407, guid: 369d7b4c1f2982d458145e21bdd9e2c9, type: 3}
-  m_Color: {r: 0.8301887, g: 0.8262727, b: 0.8262727, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -105,6 +105,11 @@ MonoBehaviour:
   speed: 0.5
   frequency: 1
   ValueDeath: 2
+  listSpriteRenders:
+  - {fileID: -2006868407, guid: 369d7b4c1f2982d458145e21bdd9e2c9, type: 3}
+  - {fileID: -1191082802, guid: 369d7b4c1f2982d458145e21bdd9e2c9, type: 3}
+  - {fileID: -1479533162, guid: 369d7b4c1f2982d458145e21bdd9e2c9, type: 3}
+  - {fileID: 493348255, guid: 369d7b4c1f2982d458145e21bdd9e2c9, type: 3}
 --- !u!61 &7026384742266017914
 BoxCollider2D:
   m_ObjectHideFlags: 0

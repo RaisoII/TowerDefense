@@ -21,8 +21,10 @@ public class Enemy : MonoBehaviour
     private bool attacking;
     private MoneyManager moneyManager;
     private List<Soldier> enemiesAttacking;
+    [SerializeField] private Sprite[] listSpriteRenders;
     private void Awake()
     {
+        GetComponent<SpriteRenderer>().sprite = listSpriteRenders[Random.Range(0, listSpriteRenders.Length - 1)];
         enemiesAttacking = new List<Soldier>();
         moneyManager = GameObject.Find("scriptsGenerales").GetComponent<MoneyManager>();
         currentSpeed = speed;
@@ -87,17 +89,18 @@ public class Enemy : MonoBehaviour
         if(life <= 0)
         {
             moneyManager.setCantMoney(ValueDeath);
-            Destroy(gameObject);
+            enabled = false;
+            StartCoroutine(waitingSecondsDeath());
         }
         else
             StartCoroutine(hit());
-    } 
+    }
 
     private IEnumerator hit()
     {
-        render.color = Color.red;
-        yield return new WaitForSeconds(.1f);
-        render.color = originalColor;
+        GetComponent<Animator>().SetBool("hit", true);
+        yield return new WaitForSeconds(.25f);
+        GetComponent<Animator>().SetBool("hit", false);
     }
 
     public void move(Soldier currentEnemy,bool state)
@@ -116,19 +119,24 @@ public class Enemy : MonoBehaviour
             
             if(attacking)
                 StopCoroutine(currentRutine);
-            
             deleteEnemies();
         }
 
         enabled = state;
     }
-
+    private IEnumerator waitingSecondsDeath()
+    {
+        GetComponent<Animator>().SetBool("death", true);
+        yield return new WaitForSeconds(.5f);
+        Destroy(gameObject);
+    }
     private void deleteEnemies() => enemiesAttacking.Clear();
 
     public void attack()
     {
         if(!attacking)
         {
+            GetComponent<Animator>().SetBool("attacking", true);
             currentSpeed = 0;
             attacking = true;
             currentRutine = StartCoroutine(rutineAttack());
@@ -167,11 +175,15 @@ public class Enemy : MonoBehaviour
         
         if(currentEnemy != null)
             currentRutine = StartCoroutine(rutineAttack());
+
         else if(currentEnemy == null && enemiesAttacking.Count == 0)
         { 
             currentSpeed = speed;
             attacking = false;
             enabled = true;
+            GetComponent<Animator>().SetBool("attacking", false);
         }
+       
     }
+   
 }

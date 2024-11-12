@@ -22,7 +22,7 @@ public class Soldier : MonoBehaviour
     private Color originalColor;
     private Coroutine currentRutine;
     private StructBarraks currentBarrak;
-    
+    [SerializeField] private Sprite[] listSpriteRenders;
     private enum SoldierState { MovingToGuard, Guarding, MovingToEnemy, Attacking, Returning }
     private SoldierState currentState;
     
@@ -35,9 +35,15 @@ public class Soldier : MonoBehaviour
         listEnemies = new List<GameObject>();
         currentState = SoldierState.MovingToGuard;
         enabled = false;
+        GetComponent<SpriteRenderer>().sprite = listSpriteRenders[Random.Range(0, listSpriteRenders.Length - 1)];
     }
     private void Update()
     {
+        if ((transform.position.x - targetPosition.x) <= 0)
+            render.flipX = false;
+        else
+            render.flipX = true;
+
         switch (currentState)
         {
             case SoldierState.MovingToGuard:
