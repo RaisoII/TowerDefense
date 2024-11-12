@@ -6,7 +6,11 @@ public class SpawnEnemies : MonoBehaviour
 {
     [SerializeField] private Point nextPoint;
     [SerializeField] private float timeMinBetweenEnemy,timeMaxBetweenEnemy;
-    
+
+    private void Awake()
+    {
+        
+    }    
     public List<GameObject> SpawnFunctionEnemies(List<GameObject> listEnemies)
     {
         List<GameObject> listPrefabs = new List<GameObject>();

@@ -41,7 +41,7 @@ public class WaveManager : MonoBehaviour
             }
             
             nextWave.interactable = false;
-            lastEnemies = wave.spawn.SpawnFunctionEnemies(wave.enemies);
+            lastEnemies = wave.spawn.GetComponent<SpawnEnemies>().SpawnFunctionEnemies(wave.enemies);
             
             if(wave.music != null)
                 SoundManager.instance.playMusic(wave.music,true,wave.isLoop);

@@ -923,7 +923,7 @@ MonoBehaviour:
     - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
   - isLoop: 0
     music: {fileID: 0}
-    spawn: {fileID: 0}
+    spawn: {fileID: 1463584851}
     timeBeforeWave: 10
     enemies:
     - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
@@ -976,7 +976,7 @@ MonoBehaviour:
     - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
   - isLoop: 0
     music: {fileID: 0}
-    spawn: {fileID: 0}
+    spawn: {fileID: 1279256328}
     timeBeforeWave: 20
     enemies:
     - {fileID: 5139193974657594151, guid: 1fcc6c84f611dd746b9fdc67142c4ef4, type: 3}
@@ -1817,7 +1817,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -7.8999634, y: 12.300064}
+  m_AnchoredPosition: {x: -7.8999634, y: 12.300049}
   m_SizeDelta: {x: 61.0414, y: 61.0414}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &814501659

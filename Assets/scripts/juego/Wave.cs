@@ -10,7 +10,7 @@ public class Wave
     [Tooltip("cancion que sonará cuando se invoque esta oleada")]
     public AudioClip music;
     [Tooltip("spwan en el que se spawneara")]
-    public SpawnEnemies spawn;
+    public GameObject spawn;
     [Tooltip("Tiempo de espera antes de iniciar esta oleada (en segundos)")]
     public float timeBeforeWave;
     [Tooltip("Lista de enemigos que se spawnearán en esta oleada")]
