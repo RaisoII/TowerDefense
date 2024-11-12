@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class StructEmpty : StructBase
 {
-
+    [SerializeField] private GameObject imageBase;
     public void CreateStructure(int index)
     {
+        imageBase.SetActive(false);
         SoundManager.instance.playSFX(clipConstruction,false);
-        gameObject.GetComponent<EdgeCollider2D>().enabled = false;
+        gameObject.GetComponent<CircleCollider2D>().enabled = false;
         GameObject structure = prefabsStructures[index];
 
         GameObject prefabInstantiate = Instantiate(structure,transform.position,Quaternion.identity);
@@ -24,8 +25,9 @@ public class StructEmpty : StructBase
 
     public void DestroyStructure(int cost)
     {
+        imageBase.SetActive(true);
         SoundManager.instance.playSFX(clipDestruction,false);
-        gameObject.GetComponent<EdgeCollider2D>().enabled = true;
+        gameObject.GetComponent<CircleCollider2D>().enabled = true;
         moneyManager.setCantMoney(Mathf.RoundToInt(50*cost/100f)); // 50% de reingresos del costo original
     }
 }
