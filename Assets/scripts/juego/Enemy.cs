@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         GetComponent<SpriteRenderer>().sprite = listSpriteRenders[Random.Range(0, listSpriteRenders.Length)];
+        GetComponent<Animator>().SetBool("isRunning", true);
         enemiesAttacking = new List<Soldier>();
         moneyManager = GameObject.Find("scriptsGenerales").GetComponent<MoneyManager>();
         currentSpeed = speed;

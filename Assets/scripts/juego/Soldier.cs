@@ -35,6 +35,7 @@ public class Soldier : MonoBehaviour
         listEnemies = new List<GameObject>();
         currentState = SoldierState.MovingToGuard;
         enabled = false;
+        GetComponent<Animator>().SetBool("isRunning", false);
         GetComponent<SpriteRenderer>().sprite = listSpriteRenders[Random.Range(0, listSpriteRenders.Length)];
     }
     private void Update()
@@ -116,10 +117,12 @@ public class Soldier : MonoBehaviour
     private void moveToTarget()
     {
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
-        
+
         // Comprueba si se ha llegado al punto de destino
         if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
             transform.position = targetPosition;
+        GetComponent<Animator>().SetBool("isRunning", (Vector2.Distance(transform.position, targetPosition) >= 0.1f));
+
     }
 
     public void setInitialPos(Vector2 posTarget)
