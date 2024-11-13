@@ -9,6 +9,8 @@ public class StructBarraks : StructBase
     [SerializeField] private List<GameObject> listSpot;
     [SerializeField] private float deltaBarrackRange;
     [SerializeField] private float timeRespawn;
+    [SerializeField] private List<GameObject> auraSoldier; // eventualmente tiene que ser un arreglo
+    [SerializeField] private GameObject auraPrefab;
     private GameObject[] soldiers;
     private Vector2[] formationOffsets;
     private Vector2[] startPos;
@@ -17,15 +19,17 @@ public class StructBarraks : StructBase
     private Vector2 dir;
     private Vector2 finalPos;
     private bool respawnRunig;
+    private bool isModeMoving;
 
     protected override void Start()
     {
         base.Start();
-
+        isModeMoving = false;
         respawnRunig = false;
         soldiers = new GameObject[3];
         formationOffsets = new Vector2[3];
         startPos = new Vector2[3];
+        auraSoldier = new List<GameObject>();
 
         GameObject scripts = GameObject.Find("scriptsGenerales"); 
         gridManager = scripts.GetComponent<GridManager>();
@@ -61,7 +65,13 @@ public class StructBarraks : StructBase
         sol.setDeltaBarrackRange(deltaBarrackRange);
         sol.setBarrak(this);
         soldiers[index] = soldierInstantiate;
-
+        
+        if(isModeMoving)
+        {
+            GameObject auraInstantiate = Instantiate(auraPrefab,soldierInstantiate.transform.position,Quaternion.identity);
+            auraInstantiate.GetComponent<AuraSoldier>().setTarget(soldierInstantiate.gameObject);
+            auraSoldier.Add(auraInstantiate);
+        }
         
         for(int i = 0; i < 3; i++) // todos los continue son necesarios ya que esta funcion se invoca no solo al instanicar la barraca
         {
@@ -175,11 +185,29 @@ public class StructBarraks : StructBase
 
     public override void selectSoldier(bool state)
     {
-        foreach(GameObject soldier in soldiers)
+        if(state)
         {
-            if(soldier != null)
+            isModeMoving = true;
+            foreach(GameObject soldier in soldiers)
             {
-                soldier.transform.GetChild(0).gameObject.SetActive(state);
+                if(soldier != null)
+                {
+                
+                    GameObject auraInstantiate = Instantiate(auraPrefab,soldier.transform.position,Quaternion.identity);
+                    auraInstantiate.GetComponent<AuraSoldier>().setTarget(soldier.gameObject);
+                    auraSoldier.Add(auraInstantiate);
+                }
+            }
+        }
+        else
+        {
+            isModeMoving = false;
+            auraSoldier.RemoveAll(GameObject => GameObject == null);
+
+            while(auraSoldier.Count > 0)
+            {
+                Destroy(auraSoldier[0]);
+                auraSoldier.RemoveAt(0);
             }
         }
     }

@@ -442,6 +442,8 @@ MonoBehaviour:
   - {fileID: 3568180366384669194}
   deltaBarrackRange: 0.2
   timeRespawn: 6
+  auraSoldier: []
+  auraPrefab: {fileID: 4169612040574206843, guid: 13e38e693298151439ccab514523e319, type: 3}
 --- !u!61 &-6079121773145078808
 BoxCollider2D:
   m_ObjectHideFlags: 0

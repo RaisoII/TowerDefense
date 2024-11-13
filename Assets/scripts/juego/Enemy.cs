@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Enemy : MonoBehaviour
 {
@@ -109,12 +110,16 @@ public class Enemy : MonoBehaviour
         if(!state)
         {
             if(this.currentEnemy == null)
+            {
+                GetComponent<Animator>().SetBool("isRunning",false);
                 this.currentEnemy = currentEnemy;
+            }
             
             enemiesAttacking.Add(currentEnemy);
         }
         else
         {
+            GetComponent<Animator>().SetBool("isRunning", true);
             attacking = false;
             this.currentEnemy = null;
             
@@ -148,43 +153,49 @@ public class Enemy : MonoBehaviour
     {
         while(attacking)
         {
-            if(currentEnemy != null)
+            if(currentEnemy != null && currentEnemy.getLife() > 0)
             {
                 currentEnemy.setLive(-damage);
                 yield return new WaitForSeconds(frequency);
             }
             else
+            {
+                currentEnemy = null;
                 break;
+            }
         }
 
         List<Soldier> deleteSoldier = new List<Soldier>();
 
         foreach(Soldier s in enemiesAttacking) // si están muertos o están atacando a otros los borro
         {
-            if(s == null  || s.getCurrentEnemy() != gameObject)
+            if(s == null || s.getLife() <= 0 || s.getCurrentEnemy() != gameObject)
                 deleteSoldier.Add(s);
         }
     
         foreach(Soldier soldier in deleteSoldier)
             enemiesAttacking.Remove(soldier);
 
-        foreach(Soldier soldier in deleteSoldier) // los que quedan (si es que quedan) serán los nuevos atacados
-        {
-            if(soldier.getAttacking())
-                currentEnemy = soldier;       
-        }
-        
-        if(currentEnemy != null)
-            currentRutine = StartCoroutine(rutineAttack());
-
-        else if(currentEnemy == null && enemiesAttacking.Count == 0)
+        // Si quedan enemigos atacando, selecciono el primero como nuevo target
+        currentEnemy = enemiesAttacking.FirstOrDefault(soldier => soldier.getAttacking());
+            
+        if(currentEnemy == null)
         { 
             currentSpeed = speed;
             attacking = false;
             enabled = true;
+            GetComponent<Animator>().SetBool("isRunning", true);
             GetComponent<Animator>().SetBool("attacking", false);
         }
-       
+        else
+        StartCoroutine(checkForEnemies());
     }
-   
+
+    private IEnumerator checkForEnemies()
+    {
+        yield return new WaitForEndOfFrame();
+        currentRutine = StartCoroutine(rutineAttack());
+    }
+
+    public float getLife() => life;
 }

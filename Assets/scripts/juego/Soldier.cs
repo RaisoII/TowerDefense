@@ -25,7 +25,6 @@ public class Soldier : MonoBehaviour
     [SerializeField] private Sprite[] listSpriteRenders;
     private enum SoldierState { MovingToGuard, Guarding, MovingToEnemy, Attacking, Returning }
     private SoldierState currentState;
-    
     private void Awake()
     {
         actualLife = totalLife;
@@ -277,10 +276,17 @@ public class Soldier : MonoBehaviour
         if(actualLife <= 0)
         {
             currentBarrak.spawnNewSoldier();
-            Destroy(gameObject);
+            StartCoroutine(waitingSecondsDeath());
         }
         else
             StartCoroutine(hit());
+    }
+
+    private IEnumerator waitingSecondsDeath()
+    {
+        GetComponent<Animator>().SetBool("death", true);
+        yield return new WaitForSeconds(.5f);
+        Destroy(gameObject);
     }
 
     private IEnumerator hit()
@@ -355,4 +361,5 @@ public class Soldier : MonoBehaviour
     public void setDeltaBarrackRange(float deltaRange) => deltaBarrackRange = deltaRange;
     public void setBarrak(StructBarraks barrak) => currentBarrak = barrak;
     public bool getAttacking() => currentState == SoldierState.Attacking;
+    public float getLife() => actualLife;
 }
