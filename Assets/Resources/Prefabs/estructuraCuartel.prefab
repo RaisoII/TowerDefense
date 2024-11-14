@@ -151,7 +151,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 1768091730, guid: eaa8db9633123cb4182ce7044cb8aeb6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -282,8 +282,8 @@ Transform:
   m_GameObject: {fileID: 3746101921845232828}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4271, z: 0}
-  m_LocalScale: {x: 6.06, y: 6.06, z: 4.0275984}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 4.9389, y: 4.9389, z: 3.2824926}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3583643189013707540}
@@ -326,9 +326,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 807231309
+  m_SortingLayer: -1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 136382810, guid: 3b023a4a0d3e80d4fb64dd89968af00d, type: 3}
   m_Color: {r: 0.8396226, g: 0.24321337, b: 0.21782663, a: 0.5019608}
   m_FlipX: 0
@@ -428,7 +428,7 @@ MonoBehaviour:
   buttonDestinySoldier: {fileID: 4549430381308397090}
   gameObjectRange: {fileID: 3571153030749278390}
   cost: 25
-  range: 2.25
+  range: 1.91
   enabledColor: {r: 1, g: 1, b: 1, a: 1}
   disabledColor: {r: 0.4509804, g: 0.4392157, b: 0.4392157, a: 1}
   clipConstruction: {fileID: 0}
@@ -597,6 +597,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3583643189013707540}
     m_Modifications:
+    - target: {fileID: 1791259432742123833, guid: 4f07dde75d7670c44915db6ef80581e3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2527221100408786349, guid: 4f07dde75d7670c44915db6ef80581e3, type: 3}
       propertyPath: m_Name
       value: botonDestroy

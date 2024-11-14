@@ -7,6 +7,7 @@ public class MoneyManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textMoney;
     [SerializeField] private ClickTerrain clickTerrain;
+    [SerializeField] private AudioClip[] coins;
 
     public int getMoney()
     {
@@ -16,6 +17,9 @@ public class MoneyManager : MonoBehaviour
 
     public void setCantMoney(int cant)
     {
+        if(cant > 0)
+            SoundManager.instance.playSFX(coins[Random.Range(0,coins.Length)],false);
+            
         int cantMoney = int.Parse(textMoney.text);
         cantMoney +=cant;
         textMoney.text = ""+ cantMoney;

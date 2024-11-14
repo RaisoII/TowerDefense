@@ -38,7 +38,6 @@ public class ClickCheckDestiny : MonoBehaviour
         }
         else
             Instantiate(terrainInvalid,mouseWorldPosition,Quaternion.identity);
-        
     }
 
     public void setParametres(ButtonDestinySoldier button,Vector2 origen, float range)

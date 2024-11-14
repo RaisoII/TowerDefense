@@ -47,6 +47,7 @@ public class ClickTerrain : MonoBehaviour
                     bool currentState = currentStruct.getStateButton();
                     currentStruct.activatedButton(!currentState);
                     currentStruct = null;
+                    previousStruct = null;
                     return;
                 }
                 else
@@ -60,6 +61,7 @@ public class ClickTerrain : MonoBehaviour
             }
             else if(hit.collider.CompareTag("StructButton"))
             {
+                previousStruct = null;
                 currentStruct = null;
                 InterfaceStructButton button = hit.collider.gameObject.GetComponent<InterfaceStructButton>();
                 button.ListenerButton();

@@ -9,7 +9,7 @@ public class Soldier : MonoBehaviour
     [SerializeField] private float frequency;
     [SerializeField] private float speed;
     [SerializeField] private float attackRange;
-    [SerializeField] private AudioClip clipHit;
+    [SerializeField] private AudioClip [] clipHit;
     private float barrackRange;
     private float actualLife;
     private float deltaBarrackRange;
@@ -303,7 +303,7 @@ public class Soldier : MonoBehaviour
         {
             if(currentEnemy != null)
             {
-                SoundManager.instance.playSFX(clipHit,false);
+                SoundManager.instance.playSFX(clipHit[Random.Range(0,clipHit.Length)],false);
                 enemy.setLive(-damage);
                 yield return new WaitForSeconds(frequency);
             }

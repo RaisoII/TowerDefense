@@ -31,8 +31,12 @@ public class GridManager : MonoBehaviour
 
     public bool IsWalkable(Vector2 pos)
     {
-        int indexX = Mathf.FloorToInt(pos.x / cellSize);
-        int indexY = Mathf.FloorToInt(pos.y / cellSize);
+        // Ajustar la posición del mouse al centro de la celda más cercana
+        float adjustedX = Mathf.Round(pos.x / cellSize) * cellSize;
+        float adjustedY = Mathf.Round(pos.y / cellSize) * cellSize;
+
+        int indexX = Mathf.FloorToInt(adjustedX / cellSize);
+        int indexY = Mathf.FloorToInt(adjustedY / cellSize);
         return grid.IsWalkable(indexX, indexY);
     }
 

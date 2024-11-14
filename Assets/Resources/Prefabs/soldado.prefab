@@ -160,7 +160,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 995192773, guid: 559ed8e89511f0e40a6293e44678e2fc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -189,7 +189,13 @@ MonoBehaviour:
   frequency: 1
   speed: 1
   attackRange: 0.2
-  clipHit: {fileID: 8300000, guid: 942c07f1ceb0fdc489f7b11f02b6873e, type: 3}
+  clipHit:
+  - {fileID: 8300000, guid: 975c274719016624c868df1fdf617548, type: 3}
+  - {fileID: 8300000, guid: e56124ea4ec0c02429f0b063194bc348, type: 3}
+  - {fileID: 8300000, guid: 41c25c9684e2fc64e9fe19ebb83c0cf8, type: 3}
+  - {fileID: 8300000, guid: 9deaab5a1c22e5041becca7135ad4c30, type: 3}
+  - {fileID: 8300000, guid: 1c72e710e48491b42841f7a4a5b233ae, type: 3}
+  - {fileID: 8300000, guid: 6197993e2cc328b49989ffb35252d6d0, type: 3}
   listSpriteRenders:
   - {fileID: 995192773, guid: 559ed8e89511f0e40a6293e44678e2fc, type: 3}
   - {fileID: 19207277, guid: 559ed8e89511f0e40a6293e44678e2fc, type: 3}
